@@ -2,13 +2,32 @@ import { useState } from "react";
 import { loginUser } from "../services/AuthService.ts";
 import { type LoginCredentials, type LoginResponse } from "../types/auth.ts";
 
-function LoginCard(){
+function AuthCard(){
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
+    const [typeAuthLogin, setTypeAuthLogin] = useState(true);
+
+    let title:string = "Login";
+    let submitButtonText:string = "Login";
+    let vraagTypeAuth:string = "Heb je geen account?";
+    let changeAuthTypeButtonText:string = "Aanmelden";
+
+    if(typeAuthLogin){
+        title = "Login";
+        submitButtonText = "Login";
+        vraagTypeAuth = "Heb je geen account?";
+        changeAuthTypeButtonText = "Aanmelden";
+    }
+    else {
+        title = "Aanmelden";
+        submitButtonText = "Aanmelden";
+        vraagTypeAuth = "Al een account?";
+        changeAuthTypeButtonText = "Login";
+    }
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRole(event.target.value);
@@ -29,10 +48,15 @@ function LoginCard(){
             setLoading(false);
         }
     };
+
+    const changeAuthType = () => {
+        setTypeAuthLogin(!typeAuthLogin);
+    }
+
     return (
         <>
             <div className="flex justify-center items-center h-auto min-h-[50%] w-1/4 border-4 rounded-4xl flex-col px-12 py-8">
-                <p className="font-bold text-3xl">Login</p>
+                <p className="font-bold text-3xl">{title}</p>
 
                 {error && <p className="text-red-500 mt-4 text-sm">{error}</p>}
 
@@ -91,17 +115,20 @@ function LoginCard(){
                         disabled={loading}
                         className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-8 w-24 hover:bg-orange-400 hover:border-orange-400 duration-500 disabled:opacity-50"
                     >
-                        {loading ? 'Laden...' : 'Aanmelden'}
+                        {loading ? 'Laden...' : submitButtonText}
                     </button>
                 </form>
 
-                <p className="text-black mt-12">Heb je geen account?</p>
-                <button className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-2 w-32 hover:bg-orange-400 hover:border-orange-400 duration-500">
-                    Account maken
+                <p className="text-black mt-12">{vraagTypeAuth}</p>
+                <button
+                    className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-2 w-32 hover:bg-orange-400 hover:border-orange-400 duration-500"
+                    onClick={changeAuthType}
+                >
+                    {changeAuthTypeButtonText}
                 </button>
             </div>
         </>
     )
 }
 
-export default LoginCard;
+export default AuthCard;
