@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { loginUser } from "../services/AuthService.ts";
-import { type LoginCredentials, type LoginResponse } from "../types/auth.ts";
+import { loginUser, signupUser } from "../services/AuthService.ts";
+import { type AuthCredentials, type LoginResponse, type SignupResponse } from "../types/auth.ts";
 
 function AuthCard(){
     const [loading, setLoading] = useState<boolean>(false);
@@ -9,14 +9,14 @@ function AuthCard(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
-    const [typeAuthLogin, setTypeAuthLogin] = useState(true);
+    const [isTypeAuthLogin, setTypeAuthLogin] = useState(true);
 
-    let title:string = "Login";
-    let submitButtonText:string = "Login";
-    let vraagTypeAuth:string = "Heb je geen account?";
-    let changeAuthTypeButtonText:string = "Aanmelden";
+    let title:string;
+    let submitButtonText:string;
+    let vraagTypeAuth:string;
+    let changeAuthTypeButtonText:string;
 
-    if(typeAuthLogin){
+    if(isTypeAuthLogin){
         title = "Login";
         submitButtonText = "Login";
         vraagTypeAuth = "Heb je geen account?";
@@ -39,9 +39,15 @@ function AuthCard(){
         setError(null);
 
         try {
-            const credentials: LoginCredentials = { email, password };
-            const response: LoginResponse = await loginUser(credentials, role);
-            console.log("Inloggen geslaagd:", response);
+            const credentials: AuthCredentials = { email, password, role };
+            if(isTypeAuthLogin){
+                const response: LoginResponse = await loginUser(credentials);
+                console.log("Inloggen geslaagd:", response);
+            }
+            else {
+                const response: SignupResponse = await signupUser(credentials);
+                console.log("Inloggen geslaagd:", response);
+            }
         } catch (err: any) {
             setError(err.message || 'Er is iets misgegaan');
         } finally {
@@ -50,7 +56,7 @@ function AuthCard(){
     };
 
     const changeAuthType = () => {
-        setTypeAuthLogin(!typeAuthLogin);
+        setTypeAuthLogin(!isTypeAuthLogin);
     }
 
     return (
