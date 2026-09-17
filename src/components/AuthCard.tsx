@@ -10,6 +10,7 @@ function AuthCard(){
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
     const [isTypeAuthLogin, setTypeAuthLogin] = useState(true);
+    const [isSignSucces, setIsSignSucces] = useState<boolean>(false);
 
     let title:string;
     let submitButtonText:string;
@@ -41,12 +42,14 @@ function AuthCard(){
         try {
             const credentials: AuthCredentials = { email, password, role };
             if(isTypeAuthLogin){
-                const response: LoginResponse = await loginUser(credentials);
-                console.log("Inloggen geslaagd:", response);
+                await loginUser(credentials);
             }
             else {
-                const response: SignupResponse = await signupUser(credentials);
-                console.log("Inloggen geslaagd:", response);
+                const res = await signupUser(credentials);
+                console.log(res);
+                if(res.message === "Succesvol aangemeld"){
+                    setIsSignSucces(true);
+                }
             }
         } catch (err: any) {
             setError(err.message || 'Er is iets misgegaan');
@@ -65,6 +68,7 @@ function AuthCard(){
                 <p className="font-bold text-3xl">{title}</p>
 
                 {error && <p className="text-red-500 mt-4 text-sm">{error}</p>}
+                {isSignSucces && <p className="text-green-500 mt-4 text-sm">"Het is gelukt om een acount aan te maken, log nu in via de inlog knop beneden"</p>}
 
                 <form onSubmit={handleLogin} className="w-full flex flex-col items-center">
                     <fieldset className="w-full mt-6" disabled={loading}>
@@ -128,7 +132,10 @@ function AuthCard(){
                 <p className="text-black mt-12">{vraagTypeAuth}</p>
                 <button
                     className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-2 w-32 hover:bg-orange-400 hover:border-orange-400 duration-500"
-                    onClick={changeAuthType}
+                    onClick={() => {
+                        changeAuthType()
+                        setIsSignSucces(false);
+                    }}
                 >
                     {changeAuthTypeButtonText}
                 </button>
