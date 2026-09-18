@@ -36,11 +36,7 @@ function AuthCard(){
 
     const handleAuth = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // voorkomt page reload
-        //Voor test, normaal gewoon: setLoading(true)
-        function wait() {
-            setLoading(true);
-        }
-        setTimeout(wait, 5000);
+        setLoading(true);
         setError(null);
 
         try {
