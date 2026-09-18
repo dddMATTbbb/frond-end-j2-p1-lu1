@@ -8,10 +8,10 @@ export const loginUser = async (credentials: AuthCredentials) => {
         body: JSON.stringify(credentials),
     });
 
-    const data = await response.json();
+    const data: LoginResponse = await response.json();
 
     if (response.ok){
-        console.log(data)
+        console.log(data.message)
     } else {
         console.error('Unable to login');
     }

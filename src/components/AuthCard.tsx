@@ -34,15 +34,21 @@ function AuthCard(){
         setRole(event.target.value);
     }
 
-    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setLoading(true);
+    const handleAuth = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // voorkomt page reload
+        //Voor test, normaal gewoon: setLoading(true)
+        function wait() {
+            setLoading(true);
+        }
+        setTimeout(wait, 5000);
         setError(null);
 
         try {
             const credentials: AuthCredentials = { email, password, role };
             if(isTypeAuthLogin){
                 await loginUser(credentials);
+                //TODO: aangeven wanner inloggen niet gelukt is
+                //TODO: doorsturen naar de VoorJou als het gelukt is
             }
             else {
                 const res = await signupUser(credentials);
@@ -70,7 +76,7 @@ function AuthCard(){
                 {error && <p className="text-red-500 mt-4 text-sm">{error}</p>}
                 {isSignSucces && <p className="text-green-500 mt-4 text-sm">"Het is gelukt om een acount aan te maken, log nu in via de inlog knop beneden"</p>}
 
-                <form onSubmit={handleLogin} className="w-full flex flex-col items-center">
+                <form onSubmit={handleAuth} className="w-full flex flex-col items-center">
                     <fieldset className="w-full mt-6" disabled={loading}>
                         <input
                             type="email"
