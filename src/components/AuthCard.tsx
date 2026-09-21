@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { loginUser, signupUser } from "../services/AuthService.ts";
 import { type AuthCredentials, type LoginResponse, type SignupResponse } from "../types/auth.ts";
+import {useNavigate} from "react-router-dom";
 
 function AuthCard(){
+    const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -42,9 +44,12 @@ function AuthCard(){
         try {
             const credentials: AuthCredentials = { email, password, role };
             if(isTypeAuthLogin){
-                await loginUser(credentials);
+                const response = await loginUser(credentials);
                 //TODO: aangeven wanner inloggen niet gelukt is
                 //TODO: doorsturen naar de VoorJou als het gelukt is
+                if(response.status === 200){
+                    navigate("/VoorJou", {replace: true});
+                }
             }
             else {
                 const res = await signupUser(credentials);

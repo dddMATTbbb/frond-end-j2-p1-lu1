@@ -6,6 +6,7 @@ import {DiscoveryPage} from "./pages/DiscoveryPage.tsx";
 import {ProfilePage} from "./pages/ProfilePage.tsx";
 import {ReadListPage} from "./pages/ReadListPage.tsx";
 import {NotFoundPage} from "./pages/NotFoundPage.tsx";
+import {PrivateRoutes} from "./services/PrivateRoutes.tsx"
 
 function App() {
   return (
@@ -13,11 +14,14 @@ function App() {
           <Routes>
               <Route element={<Layout />} >
                   <Route path="/" element={<LandingPage/>}/>
-                  <Route path="/VoorJou" element={<ForYouPage/>}/>
-                  <Route path="/Ontdekken" element={<DiscoveryPage/>}/>
-                  <Route path="/Profiel" element={<ProfilePage/>}/>
-                  <Route path="/LeesLijst" element={<ReadListPage/>}/>
                   <Route path={"*"} element={<NotFoundPage/>}/>
+
+                  <Route element={<PrivateRoutes />}>
+                      <Route path="/VoorJou" element={<ForYouPage/>}/>
+                      <Route path="/Ontdekken" element={<DiscoveryPage/>}/>
+                      <Route path="/Profiel" element={<ProfilePage/>}/>
+                      <Route path="/LeesLijst" element={<ReadListPage/>}/>
+                  </Route>
               </Route>
           </Routes>
       </Router>

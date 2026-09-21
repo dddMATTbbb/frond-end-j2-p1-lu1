@@ -12,8 +12,10 @@ export const loginUser = async (credentials: AuthCredentials) => {
 
     if (response.ok){
         console.log(data.message)
+        return response;
     } else {
         console.error('Unable to login');
+        return response;
     }
 };
 
