@@ -46,7 +46,6 @@ function AuthCard(){
             if(isTypeAuthLogin){
                 const response = await loginUser(credentials);
                 //TODO: aangeven wanner inloggen niet gelukt is
-                //TODO: doorsturen naar de VoorJou als het gelukt is
                 if(response.status === 200){
                     navigate("/VoorJou", {replace: true});
                 }
