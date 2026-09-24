@@ -16,13 +16,13 @@ function App() {
               <Route element={<Layout />} >
                   <Route path="/" element={<LandingPage/>}/>
                   <Route path={"*"} element={<NotFoundPage/>}/>
-                  <Route path={"/test"} element={<LeesprofielQuestionPage/>}/>
 
                   <Route element={<PrivateRoutes />}>
                       <Route path="/VoorJou" element={<ForYouPage/>}/>
                       <Route path="/Ontdekken" element={<DiscoveryPage/>}/>
                       <Route path="/Profiel" element={<ProfilePage/>}/>
                       <Route path="/LeesLijst" element={<ReadListPage/>}/>
+                      <Route path={"/LeesprofielQuestionPage"} element={<LeesprofielQuestionPage/>}/>
                   </Route>
               </Route>
           </Routes>

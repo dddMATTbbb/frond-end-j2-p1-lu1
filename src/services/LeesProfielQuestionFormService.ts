@@ -8,10 +8,8 @@ export const submitForm = async (leesProfiel: LeesProfiel) => {
             credentials: "include",
             body: JSON.stringify(leesProfiel)
         });
-        console.log("response: " + response);
         return response;
     } catch(err){
-        console.log(err);
         throw err;
     }
 }
