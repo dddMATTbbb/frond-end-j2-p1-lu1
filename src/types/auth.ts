@@ -7,7 +7,3 @@ export interface AuthCredentials {
 export interface LoginResponse {
     message: string;
 }
-
-export interface SignupResponse {
-    message: string;
-}

@@ -7,6 +7,7 @@ import {ProfilePage} from "./pages/ProfilePage.tsx";
 import {ReadListPage} from "./pages/ReadListPage.tsx";
 import {NotFoundPage} from "./pages/NotFoundPage.tsx";
 import {PrivateRoutes} from "./services/PrivateRoutes.tsx"
+import {LeesprofielQuestionPage} from "./pages/LeesprofielQuestionPage.tsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route element={<Layout />} >
                   <Route path="/" element={<LandingPage/>}/>
                   <Route path={"*"} element={<NotFoundPage/>}/>
+                  <Route path={"/test"} element={<LeesprofielQuestionPage/>}/>
 
                   <Route element={<PrivateRoutes />}>
                       <Route path="/VoorJou" element={<ForYouPage/>}/>
