@@ -23,7 +23,7 @@ export const PrivateRoutes = () => {
 
         const checkProfile = async () => {
             try{
-                const response = await fetch('http://localhost:3000/checkLeesProfiel', {
+                const response = await fetch('http://localhost:3000/leesProfiel', {
                     method: "GET",
                     credentials: "include",
                 });
