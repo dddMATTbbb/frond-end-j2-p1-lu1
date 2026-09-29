@@ -44,21 +44,35 @@ function AuthCard(){
         try {
             const credentials: AuthCredentials = { email, password, role };
             if(isTypeAuthLogin){
-                //TODO: aangeven wanneer inlog niet is gelukt
                 const response = await loginUser(credentials);
-                if(response.status === 200){
+                if(response.message === "Authentication successful"){
+                    setError(null)
                     navigate("/VoorJou", {replace: true});
+                } else if (response.error === "Ongeldige email of wachtwoord") {
+                    setError("Sorry, de combinatie email en wachtwoord is incorrect.")
+                } else {
+                    console.log(response.error);
+                    setError("Sorry er is een fout opgetreden in onze service, probeer het later opnieuw");
                 }
             }
             else {
-                const res = await signupUser(credentials);
-                console.log(res);
-                if(res.message === "Succesvol aangemeld"){
+                const response = await signupUser(credentials);
+                console.log(response);
+                if(response.message === "Succesvol aangemeld"){
+                    setError(null);
                     setIsSignSucces(true);
+                } else if(response.error === "User already exists"){
+                    setError("Deze gebruiker bestaat al, klik op de login knop helemaal beneden om in te loggen met deze gebruiker");
+                } else if(response.error === "Invalid input"){
+                    setError("Deze input is onjuist, zorg dat je alle velden hebt ingevuld")
+                }
+                else {
+                    console.log(response.error);
+                    setError("Er is iets mis gegaan")
                 }
             }
         } catch (err: any) {
-            setError(err.message || 'Er is iets misgegaan');
+
         } finally {
             setLoading(false);
         }

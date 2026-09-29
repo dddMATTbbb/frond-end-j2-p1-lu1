@@ -8,26 +8,22 @@ export const loginUser = async (credentials: AuthCredentials) => {
         body: JSON.stringify(credentials),
     });
 
-    const data: LoginResponse = await response.json();
-
     if (response.ok){
-        console.log(data.message)
-        return response;
+        return response.json();
     } else {
-        console.error('Unable to login');
-        return response;
+        return response.json();
     }
 };
 
 export const signupUser = async (credentials: AuthCredentials) => {
-    const response = await fetch("http://127.0.0.1:3000/signup", {
+    const response = await fetch("http://localhost:3000/signup", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
     });
 
     if (!response.ok) {
-        throw new Error('Inloggen mislukt');
+        return response.json();
     }
 
     return response.json();
