@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useLeesprofielQuestForm} from "../hooks/useLeesprofielQuestionForm.ts";
 import Modal from "../components/Modal.tsx";
+import LeesprofielQuestionModal from "../components/LeesProfielSuccesModal.tsx";
 
 export function LeesprofielQuestionPage() {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ export function LeesprofielQuestionPage() {
                 isOpen={isSubmitSuccess}
                 onClose={() => setIsSubmitSuccess(false)}
                 title={"Succes!"}
-                children={<><p>Er is succesvol een leesprofiel aangemaakt, klik op de knop om verder te gaan</p> <button onClick={() => navigate("/VoorJou")}>Verder</button></>}>
+                children={<LeesprofielQuestionModal />}>
             </Modal>
             <div className="flex items-center justify-center w-full h-screen flex-col">
                 <p className="text-black, text-2xl">Een paar vragen om achter jou boeken intresse te komen</p>
