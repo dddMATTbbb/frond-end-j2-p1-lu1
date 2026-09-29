@@ -1,11 +1,11 @@
 import {useLeesprofielQuestForm} from "../hooks/useLeesprofielQuestionForm.ts";
 
-const {
-    handleChange,
-    form,
-} = useLeesprofielQuestForm();
+type Props = {
+    form: ReturnType<typeof useLeesprofielQuestForm>["form"];
+    handleChange: ReturnType<typeof useLeesprofielQuestForm>["handleChange"];
+};
 
-export default function LeesProfielQuestionsHtml(){
+export default function LeesProfielQuestionsHtml({form, handleChange}: Props) {
     return (
         <>
             <div className="flex items-center justify-center flex-col">
