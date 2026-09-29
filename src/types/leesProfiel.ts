@@ -1,5 +1,5 @@
 export interface LeesProfiel {
-    leeftijd: number;
+    leeftijd: number | undefined;
     gender: string;
     leesniveau: string;
     genre: string;

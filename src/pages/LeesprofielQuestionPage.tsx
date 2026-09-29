@@ -1,19 +1,14 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {useLeesprofielQuestForm} from "../hooks/useLeesprofielQuestionForm.ts";
 import Modal from "../components/Modal.tsx";
 import LeesprofielQuestionModal from "../components/LeesProfielSuccesModal.tsx";
 
 export function LeesprofielQuestionPage() {
-    const navigate = useNavigate();
     const {
-        setLeeftijd,
-        setGender,
-        setLeesNiveau,
-        setGenre,
         handleSubmit,
+        handleChange,
         isSubmitSuccess,
         setIsSubmitSuccess,
+        form,
     } = useLeesprofielQuestForm();
 
     return (
@@ -35,17 +30,18 @@ export function LeesprofielQuestionPage() {
                                     required
                                     className="border-b-2 outline-none"
                                     type="number"
-                                    id="age"
-                                    name="age"
+                                    id="leeftijd"
+                                    name="leeftijd"
                                     min="16"
                                     max="120"
-                                    onChange={(e) => setLeeftijd(+e.target.value)}
+                                    onChange={handleChange}
+                                    value={form?.leeftijd ?? 16}
                                 />
                             </fieldset>
                             <fieldset className="w-full mt-5">
                                 <label htmlFor="gender">Gender: </label>
                                 <select required name='gender' id={'gender'} className="outline-none border-2 rounded-md"
-                                        onChange={(e) => setGender(e.target.value)}>
+                                        onChange={handleChange} value={form.gender}>
                                     <option value=""></option>
                                     <option value="man">Man</option>
                                     <option value="vrouw">Vrouw</option>
@@ -54,9 +50,9 @@ export function LeesprofielQuestionPage() {
                                 </select>
                             </fieldset>
                             <fieldset className="w-full mt-5">
-                                <label htmlFor="leesNivea">Leesniveau: </label>
-                                <select required name='gender' id={'gender'} className="outline-none border-2 rounded-md"
-                                        onChange={(e) => setLeesNiveau(e.target.value)}>
+                                <label htmlFor="leesniveau">Leesniveau: </label>
+                                <select required name='leesniveau' id={'leesniveau'} className="outline-none border-2 rounded-md"
+                                        onChange={handleChange} value={form.leesniveau}>
                                     <option value=""></option>
                                     <option value="2F">2F</option>
                                     <option value="3F">3F</option>
@@ -66,7 +62,7 @@ export function LeesprofielQuestionPage() {
                             <fieldset className="w-full mt-5">
                                 <label htmlFor="genre">Favoriete genre: </label>
                                 <select required name='genre' id={'genre'} className="outline-none border-2 rounded-md"
-                                        onChange={(e) => setGenre(e.target.value)}>
+                                        onChange={handleChange} value={form.genre}>
                                     <option value=""></option>
                                     <option value="roman">Roman</option>
                                     <option value="thriller">Thriller</option>
