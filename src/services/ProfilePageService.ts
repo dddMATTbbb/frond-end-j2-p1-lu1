@@ -11,3 +11,12 @@ export const getUserLeesprofielData = async () => {
         console.log(error);
     }
 }
+
+export const updateLeesprofielData = async (leesprofiel: LeesProfiel) => {
+    return await fetch('http://localhost:3000/leesProfiel', {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify(leesprofiel)
+    })
+}
