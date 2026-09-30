@@ -1,4 +1,4 @@
-import {type AuthCredentials, type LoginResponse} from "../types/auth.ts";
+import {type AuthCredentials} from "../types/auth.ts";
 
 export const loginUser = async (credentials: AuthCredentials) => {
     const response = await fetch("http://localhost:3000/login", {

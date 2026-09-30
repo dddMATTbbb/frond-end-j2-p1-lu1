@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {submitForm} from "../services/LeesProfielQuestionFormService.ts";
+import {submitForm, getForm} from "../services/LeesProfielQuestionFormService.ts";
 import type {LeesProfiel} from "../types/leesProfiel.ts";
 import {usePersistedState} from "./usePersistendState.ts";
 
@@ -18,8 +18,6 @@ export function useLeesprofielQuestForm(){
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>)=> {
         event.preventDefault();
-
-        console.log(form);
 
         const response  = await submitForm(form);
         if (response.ok) {
