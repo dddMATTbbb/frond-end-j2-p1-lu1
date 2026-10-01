@@ -1,11 +1,13 @@
+import ModalCloseButton from "./ModalCloseButton.tsx";
 type ModalVariant = "error" | "success" | "neutral";
 
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
-    children: React.ReactNode;
+    description: string;
+    actions?: React.ReactNode;
     title: string;
-    variant?: ModalVariant; // standaard "neutral"
+    variant?: ModalVariant;
 }
 
 const variantStyles: Record<ModalVariant, {
@@ -37,7 +39,8 @@ const variantStyles: Record<ModalVariant, {
 export default function Modal({
                                   isOpen,
                                   onClose,
-                                  children,
+                                  description,
+                                  actions,
                                   title,
                                   variant = "neutral",
                               }: ModalProps) {
@@ -48,7 +51,6 @@ export default function Modal({
     return (
         <div
             className="fixed inset-0 bg-gray-500/60 flex items-center justify-center z-1000"
-            onClick={onClose}
         >
             <div
                 role={variant === "error" ? "alertdialog" : "dialog"}
@@ -61,7 +63,16 @@ export default function Modal({
                     {title}
                 </h2>
 
-                <div className="mt-4">{children}</div>
+                <div className="mt-4"><p>{description}</p></div>
+
+                <div className="mt-6 flex justify-end gap-3">
+                    {actions ?? (
+                        <ModalCloseButton
+                            onClick={onClose}
+                            styles={`px-4 py-2 rounded text-white ${styles.button}`}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );

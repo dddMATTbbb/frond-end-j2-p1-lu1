@@ -97,8 +97,8 @@ export function ProfilePage() {
                     onClose={closeModal}
                     title={modal.title}
                     variant={modal.variant}
+                    description={modal.message}
                 >
-                    {modal.message}
                 </Modal>
             </div>
         </>
