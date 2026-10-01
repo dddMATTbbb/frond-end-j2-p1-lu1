@@ -1,20 +1,10 @@
 import Navbar from "../components/Navbar.tsx";
-import {useProfileData} from "../hooks/ProfilePageHook.ts";
+import {useProfilePage} from "../hooks/ProfilePageHook.ts";
 import SubmitFormButton from "../components/SubmitFormButton.tsx";
+import Modal from "../components/Modal.tsx";
 
 export function ProfilePage() {
-    const { form, setForm, loading, isChange, setIsChange, updateLeesProfiel } = useProfileData();
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-        const { name, value } = e.target;
-        setIsChange(true);
-        setForm((prev) => ({
-            ...prev,
-            [name]: name === "leeftijd" ? Number(value) : value,
-        }));
-    };
+    const {profiel, loading, onUpdateLeesProfiel, modal, closeModal, handleChange } = useProfilePage();
 
     if (loading) {
         return (
@@ -29,7 +19,7 @@ export function ProfilePage() {
         <>
             <Navbar/>
             <div className="flex h-screen w-full p-5">
-                <form onSubmit={updateLeesProfiel}>
+                <form onSubmit={onUpdateLeesProfiel}>
                     <fieldset>
                         <h2 className="text-xl">Profiel gegevens:</h2>
                         <fieldset className="w-full">
@@ -42,7 +32,7 @@ export function ProfilePage() {
                                 name="leeftijd"
                                 min="16"
                                 max="120"
-                                value={form.leeftijd}
+                                value={profiel?.leeftijd}
                                 onChange={handleChange}
                             />
                         </fieldset>
@@ -54,7 +44,7 @@ export function ProfilePage() {
                                 name="gender"
                                 id="gender"
                                 className="outline-none border-2 rounded-md"
-                                value={form.gender}
+                                value={profiel?.gender}
                                 onChange={handleChange}
                             >
                                 <option value=""></option>
@@ -72,7 +62,7 @@ export function ProfilePage() {
                                 name="leesniveau"
                                 id="leesniveau"
                                 className="outline-none border-2 rounded-md"
-                                value={form.leesniveau}
+                                value={profiel?.leesniveau}
                                 onChange={handleChange}
                             >
                                 <option value=""></option>
@@ -89,7 +79,7 @@ export function ProfilePage() {
                                 name="genre"
                                 id="genre"
                                 className="outline-none border-2 rounded-md"
-                                value={form.genre}
+                                value={profiel?.genre}
                                 onChange={handleChange}
                             >
                                 <option value=""></option>
@@ -102,6 +92,14 @@ export function ProfilePage() {
                     </fieldset>
                     <SubmitFormButton buttonText={"Updaten"} />
                 </form>
+                <Modal
+                    isOpen={modal.isOpen}
+                    onClose={closeModal}
+                    title={modal.title}
+                    variant={modal.variant}
+                >
+                    {modal.message}
+                </Modal>
             </div>
         </>
     )

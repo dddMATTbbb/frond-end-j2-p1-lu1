@@ -18,6 +18,7 @@ export function LeesprofielQuestionPage() {
                 isOpen={isSubmitSuccess}
                 onClose={() => setIsSubmitSuccess(false)}
                 title={"Succes!"}
+                variant={"success"}
                 children={<LeesprofielQuestionModal />}>
             </Modal>
             <div className="flex items-center justify-center w-full h-screen flex-col">

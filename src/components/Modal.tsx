@@ -62,13 +62,6 @@ export default function Modal({
                 </h2>
 
                 <div className="mt-4">{children}</div>
-
-                <button
-                    onClick={onClose}
-                    className={`mt-6 self-end px-4 py-2 rounded-md text-white ${styles.button}`}
-                >
-                    Sluiten
-                </button>
             </div>
         </div>
     );
