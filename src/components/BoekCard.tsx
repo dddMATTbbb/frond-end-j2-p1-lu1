@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 interface BoekCardProps{
     key: string;
     titel:string;
@@ -6,6 +8,11 @@ interface BoekCardProps{
 }
 
 export default function BoekCard({key, titel, auteur, coverUrl}: BoekCardProps){
+    const [liked, setLiked] = useState(false);
+    function handleBookmarkClick(){
+        setLiked(!liked);
+    }
+
     return (
         <>
             <div className="flex flex-col justify-center items-center border-black border-2 rounded-md w-60 h-96 p-5">
@@ -19,12 +26,12 @@ export default function BoekCard({key, titel, auteur, coverUrl}: BoekCardProps){
                         <h3 className="text-lg font-semibold truncate">{titel}</h3>
                         <p className="text-gray-600">{auteur}</p>
                     </div>
-                    <button
-                        type="button"
-                        aria-label="Like"
-                        className="shrink-0 h-10 w-10 rounded-full border flex items-center justify-center"
-                    >
-                    </button>
+                    <input
+                        className={"shrink-0 h-10 w-auto"}
+                        onClick={handleBookmarkClick}
+                        type={"image"}
+                        src={liked ? "../src/assets/BookmarkFilled.svg" : "../src/assets/Bookmark.svg"}
+                    />
                 </div>
             </div>
         </>
