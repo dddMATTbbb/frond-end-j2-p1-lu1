@@ -1,12 +1,11 @@
-import {flushSync} from "react-dom";
-
 interface BoekCardProps{
+    key: string;
     titel:string;
     auteur:string;
     coverUrl?:string;
 }
 
-export default function BoekCard({titel, auteur, coverUrl}: BoekCardProps){
+export default function BoekCard({key, titel, auteur, coverUrl}: BoekCardProps){
     return (
         <>
             <div className="flex flex-col justify-center items-center border-black border-2 rounded-md w-60 h-96 p-5">
