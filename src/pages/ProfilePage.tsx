@@ -90,7 +90,7 @@ export function ProfilePage() {
                             </select>
                         </fieldset>
                     </fieldset>
-                    <SubmitFormButton buttonText={"Updaten"} />
+                    <SubmitFormButton buttonText={"Updaten"} disabledVar={loading} />
                 </form>
                 <Modal
                     isOpen={modal.isOpen}

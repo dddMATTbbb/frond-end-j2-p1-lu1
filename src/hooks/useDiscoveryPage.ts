@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
-import {getBoeken} from "../services/BoekenService.ts";
+import {getBoeken, getBoekenByFilter} from "../services/BoekenService.ts";
 import type {Boek} from "../types/boeken.ts";
 
 export function useDiscoveryPage() {
     const [boeken, setBoeken] = useState<Boek[]>([]);
     const [loading, setLoading] = useState(true);
+    const [zoekTerm, setZoekTerm] = useState("");
     const emptyBoekList: Boek[] = []
 
     useEffect(() => {
@@ -22,6 +23,21 @@ export function useDiscoveryPage() {
         loadBoeken();
     }, [])
 
+    const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        setLoading(true);
 
-    return {boeken, loading}
+        try{
+            const data: Boek[] = await getBoekenByFilter(zoekTerm) ?? emptyBoekList;
+            console.log(data)
+            setBoeken(data)
+        }catch(error){
+            console.log(error);
+        }finally{
+            setLoading(false);
+        }
+    }
+
+
+    return {boeken, loading, zoekTerm, setZoekTerm, handleSubmit}
 }

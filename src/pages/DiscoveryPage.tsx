@@ -1,25 +1,35 @@
 import Navbar from "../components/Navbar.tsx";
 import BoekCard from "../components/BoekCard.tsx";
 import {useDiscoveryPage} from "../hooks/useDiscoveryPage.ts";
+import DiscoveryPageFilterBar from "../components/DiscoveryPageFilterBar.tsx";
 
 export function DiscoveryPage() {
     const {
         boeken,
-        loading
+        loading,
+        zoekTerm,
+        setZoekTerm,
+        handleSubmit
     } = useDiscoveryPage();
-
-    if (loading) {
-        return <p>loading...</p>;
-    }
 
     return (
         <>
             <Navbar/>
-            <div className="flex justify-baseline items-start h-screen w-full p-10 flex-wrap gap-6">
-                {boeken.map((boek) => (
-                    <BoekCard key={boek.id} titel={boek.Titel} auteur={boek.Auteur} />
-                ))}
-            </div>
+            <DiscoveryPageFilterBar
+                zoekTerm={zoekTerm}
+                setZoekTerm={setZoekTerm}
+                handleSubmit={handleSubmit}
+                loading={loading}
+            />
+            {loading ? (
+                <p>loading...</p>
+            ) : (
+                <div className="flex items-start w-full p-10 flex-wrap gap-6">
+                    {boeken.map((boek) => (
+                        <BoekCard key={boek.id} titel={boek.Titel} auteur={boek.Auteur} />
+                    ))}
+                </div>
+            )}
         </>
     )
 }
