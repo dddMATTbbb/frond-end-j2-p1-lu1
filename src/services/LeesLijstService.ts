@@ -12,6 +12,7 @@ export const getLeesLijst = async () => {
             throw new Error(response.statusText);
         }
         const data:Boek[] = await response.json()
+        console.log(data)
         return data
     } catch (error){
         console.error(error)

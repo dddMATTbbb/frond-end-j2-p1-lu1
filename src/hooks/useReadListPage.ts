@@ -8,7 +8,7 @@ export function useReadListPage() {
     const emptyLeesLijst: Boek[] = []
 
     useEffect(() => {
-        async function getLeesLijst() {
+        async function fetchLeesLijst() {
             try{
                 const data:Boek[] = await getLeesLijst() ?? emptyLeesLijst
                 setLeesLijst(data)
@@ -19,7 +19,7 @@ export function useReadListPage() {
             }
         }
 
-        getLeesLijst()
+        fetchLeesLijst()
     }, [])
 
     return {leesLijst, loading}

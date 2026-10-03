@@ -16,11 +16,11 @@ export function ReadListPage(){
                     {!leesLijst || leesLijst.length === 0 ? (
                         <p>Je hebt geen boeken in je leeslijst</p>
                     ) : (
-                        leesLijst.map((boek) => (
+                        leesLijst.map((leesLijst) => (
                             <BoekCard
-                                key={boek.id}
-                                titel={boek.Titel}
-                                auteur={boek.Auteur}
+                                key={leesLijst.id}
+                                titel={leesLijst.Titel}
+                                auteur={leesLijst.Auteur}
                             />
                         ))
                     )}
