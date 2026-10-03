@@ -1,12 +1,31 @@
 import Navbar from "../components/Navbar.tsx";
+import {useReadListPage} from "../hooks/useReadListPage.ts";
+import BoekCard from "../components/BoekCard.tsx";
 
 export function ReadListPage(){
+    const {loading, leesLijst} = useReadListPage();
+
+
     return (
         <>
-            <Navbar/>
-            <div className="flex justify-center items-center h-screen w-full">
-                <h1 className="text-black text-4xl">Lees lijst</h1>
-            </div>
+            <Navbar />
+            {loading ? (
+                <p>loading...</p>
+            ) : (
+                <div className="flex h-screen w-full">
+                    {!leesLijst || leesLijst.length === 0 ? (
+                        <p>Je hebt geen boeken in je leeslijst</p>
+                    ) : (
+                        leesLijst.map((boek) => (
+                            <BoekCard
+                                key={boek.id}
+                                titel={boek.Titel}
+                                auteur={boek.Auteur}
+                            />
+                        ))
+                    )}
+                </div>
+            )}
         </>
     )
 }

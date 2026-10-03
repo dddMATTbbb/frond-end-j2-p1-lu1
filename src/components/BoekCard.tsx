@@ -9,8 +9,13 @@ interface BoekCardProps{
 
 export default function BoekCard({key, titel, auteur, coverUrl}: BoekCardProps){
     const [liked, setLiked] = useState(false);
+    const [read, setRead] = useState(false);
     function handleBookmarkClick(){
         setLiked(!liked);
+    }
+
+    function handleReadClick(){
+        setRead(!read);
     }
 
     return (
@@ -23,7 +28,7 @@ export default function BoekCard({key, titel, auteur, coverUrl}: BoekCardProps){
                 />
                 <div className="flex flex-row items-end justify-between w-full mt-2">
                     <div className="grow min-w-0">
-                        <h3 className="text-lg font-semibold truncate">{titel}</h3>
+                        <h3 className="font-semibold truncate">{titel}</h3>
                         <p className="text-gray-600">{auteur}</p>
                     </div>
                     <input
@@ -31,6 +36,12 @@ export default function BoekCard({key, titel, auteur, coverUrl}: BoekCardProps){
                         onClick={handleBookmarkClick}
                         type={"image"}
                         src={liked ? "../src/assets/BookmarkFilled.svg" : "../src/assets/Bookmark.svg"}
+                    />
+                    <input
+                        className={"shrink-0 h-10 w-auto"}
+                        onClick={handleReadClick}
+                        type={"image"}
+                        src={read ? "../src/assets/book_read.svg" : "../src/assets/book_unread.svg"}
                     />
                 </div>
             </div>
