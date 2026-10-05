@@ -1,13 +1,13 @@
 import {useState} from "react";
 
 interface BoekCardProps{
-    key: string;
+    id: string;
     titel:string;
     auteur:string;
     coverUrl?:string;
 }
 
-export default function BoekCard({key, titel, auteur, coverUrl}: BoekCardProps){
+export default function BoekCard({id, titel, auteur, coverUrl}: BoekCardProps){
     const [liked, setLiked] = useState(false);
     const [read, setRead] = useState(false);
     function handleBookmarkClick(){

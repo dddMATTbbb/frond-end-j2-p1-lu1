@@ -18,7 +18,7 @@ export function ReadListPage(){
                     ) : (
                         leesLijst.map((leesLijst) => (
                             <BoekCard
-                                key={leesLijst.id}
+                                id={leesLijst.id}
                                 titel={leesLijst.Titel}
                                 auteur={leesLijst.Auteur}
                             />

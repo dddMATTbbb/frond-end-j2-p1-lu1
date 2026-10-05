@@ -18,3 +18,23 @@ export const getLeesLijst = async () => {
         console.error(error)
     }
 }
+
+export const updateLeesLijst = async (id: string) => {
+    try{
+        const response = await fetch('http://localhost:3000/leesLijst?' + new URLSearchParams({id}), {
+            method: "POST",
+            credentials: "include",
+        })
+
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+
+        const data = await response.json()
+        console.log( data)
+        return data
+    }catch(error){
+        console.error(error)
+        throw new Error("server fout");
+    }
+}

@@ -26,7 +26,7 @@ export function DiscoveryPage() {
             ) : (
                 <div className="flex items-start w-full p-10 flex-wrap gap-6">
                     {boeken.map((boek) => (
-                        <BoekCard key={boek.id} titel={boek.Titel} auteur={boek.Auteur} />
+                        <BoekCard id={boek.id} titel={boek.Titel} auteur={boek.Auteur} />
                     ))}
                 </div>
             )}
