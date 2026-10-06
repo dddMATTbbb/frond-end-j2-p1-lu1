@@ -6,7 +6,7 @@ import type { LeesProfiel } from "../types/leesProfiel";
 const leegProfiel: LeesProfiel = {
     leeftijd: 0,
     gender: "",
-    genre: "",
+    typeMatriaal: "",
     leesniveau: "",
 };
 

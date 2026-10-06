@@ -60,20 +60,20 @@ export default function LeesProfielQuestionsHtml({form, handleChange}: Props) {
                 </fieldset>
 
                 <fieldset className="w-full mt-5">
-                    <label htmlFor="genre">Favoriete genre: </label>
+                    <label htmlFor="genre">Favoriete lees materiaal: </label>
                     <select
                         required
                         name="genre"
                         id="genre"
                         className="outline-none border-2 rounded-md"
                         onChange={handleChange}
-                        value={form?.genre ?? ''}
+                        value={form?.typeMatriaal ?? ''}
                     >
                         <option value=""></option>
-                        <option value="roman">Roman</option>
-                        <option value="thriller">Thriller</option>
-                        <option value="romantiek">Romantiek</option>
-                        <option value="fantasy">Fantasy</option>
+                        <option value="Boek - roman">Roman</option>
+                        <option value="Boek - thriller">Thriller</option>
+                        <option value="blogpost">Blogpost</option>
+                        <option value="tijdschrift">tijdschrift</option>
                     </select>
                 </fieldset>
             </div>
