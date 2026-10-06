@@ -5,9 +5,9 @@ interface BoekCardProps{
     titel:string;
     auteur:string;
     coverUrl?:string;
-    isBookmarked?:boolean;
+    isBookmarked:boolean;
     isRead?:boolean;
-    addToLeesLijst: (boekId: string) => void;
+    addToLeesLijst: (boekId: string, isBookmarked:boolean) => void;
 }
 
 export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmarked, addToLeesLijst}: BoekCardProps){
@@ -32,7 +32,7 @@ export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmar
                     </div>
                     <input
                         className={"shrink-0 h-10 w-auto"}
-                        onClick={() => addToLeesLijst(id)}
+                        onClick={() => addToLeesLijst(id, isBookmarked)}
                         type={"image"}
                         src={isBookmarked ? "../src/assets/BookmarkFilled.svg" : "../src/assets/Bookmark.svg"}
                     />

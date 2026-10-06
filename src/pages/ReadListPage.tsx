@@ -23,7 +23,7 @@ export function ReadListPage(){
                                 auteur={leesLijst.Auteur}
                                 isRead={leesLijst.isRead}
                                 isBookmarked={leesLijst.isBookmarked}
-                                addToLeesLijst={addToLeesLijst}
+                                addToLeesLijst={() => addToLeesLijst}
                             />
                         ))
                     )}

@@ -13,6 +13,6 @@ export interface Boek {
     Themas?: string;
     Themas_boek?: string;
     coverUrl?: string;
-    isBookmarked?: boolean;
+    isBookmarked: boolean;
     isRead?: boolean;
 }
