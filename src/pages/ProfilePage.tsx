@@ -73,20 +73,20 @@ export function ProfilePage() {
                         </fieldset>
 
                         <fieldset className="w-full mt-5">
-                            <label htmlFor="genre">Favoriete genre: </label>
+                            <label htmlFor="favorieteTypeMatariaal">Favoriete lees materiaal: </label>
                             <select
                                 required
-                                name="genre"
-                                id="genre"
+                                name="favorieteTypeMatariaal"
+                                id="favorieteTypeMatariaal"
                                 className="outline-none border-2 rounded-md"
-                                value={profiel?.genre}
+                                value={profiel?.favorieteTypeMatariaal ?? ''}
                                 onChange={handleChange}
                             >
                                 <option value=""></option>
-                                <option value="roman">Roman</option>
-                                <option value="thriller">Thriller</option>
-                                <option value="romantiek">Romantiek</option>
-                                <option value="fantasy">Fantasy</option>
+                                <option value="Boek - roman">Roman</option>
+                                <option value="Boek - thriller">Thriller</option>
+                                <option value="blogpost">Blogpost</option>
+                                <option value="tijdschrift">tijdschrift</option>
                             </select>
                         </fieldset>
                     </fieldset>

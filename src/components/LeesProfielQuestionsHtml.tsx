@@ -60,14 +60,14 @@ export default function LeesProfielQuestionsHtml({form, handleChange}: Props) {
                 </fieldset>
 
                 <fieldset className="w-full mt-5">
-                    <label htmlFor="genre">Favoriete lees materiaal: </label>
+                    <label htmlFor="favorieteTypeMatariaal">Favoriete lees materiaal: </label>
                     <select
                         required
-                        name="genre"
-                        id="genre"
+                        name="favorieteTypeMatariaal"
+                        id="favorieteTypeMatariaal"
                         className="outline-none border-2 rounded-md"
                         onChange={handleChange}
-                        value={form?.typeMatriaal ?? ''}
+                        value={form?.favorieteTypeMatariaal ?? ''}
                     >
                         <option value=""></option>
                         <option value="Boek - roman">Roman</option>

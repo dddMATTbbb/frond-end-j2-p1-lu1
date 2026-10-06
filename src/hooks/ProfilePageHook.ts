@@ -6,7 +6,7 @@ import type { LeesProfiel } from "../types/leesProfiel";
 const leegProfiel: LeesProfiel = {
     leeftijd: 0,
     gender: "",
-    typeMatriaal: "",
+    favorieteTypeMatariaal: "",
     leesniveau: "",
 };
 
@@ -22,6 +22,7 @@ export function useProfilePage() {
             try {
                 const data = await getUserLeesprofielData();
                 setProfiel(data ?? leegProfiel);
+                console.log(profiel)
             } catch {
                 showModal("Er ging iets mis", "Je profiel kon niet worden geladen.", "error");
             } finally {

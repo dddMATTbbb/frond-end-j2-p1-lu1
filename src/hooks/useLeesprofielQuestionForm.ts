@@ -3,7 +3,7 @@ import {submitForm, getForm} from "../services/LeesProfielQuestionFormService.ts
 import type {LeesProfiel} from "../types/leesProfiel.ts";
 import {usePersistedState} from "./usePersistendState.ts";
 
-const emptyLeesprofielFormData: LeesProfiel = {leeftijd: undefined, gender: "", leesniveau: "", genre: ""};
+const emptyLeesprofielFormData: LeesProfiel = {leeftijd: undefined, gender: "", leesniveau: "", favorieteTypeMatariaal: ""};
 
 export function useLeesprofielQuestForm(){
     const [isSubmitSuccess, setIsSubmitSuccess] = useState<boolean>(false);
