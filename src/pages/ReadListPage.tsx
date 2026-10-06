@@ -12,7 +12,7 @@ export function ReadListPage(){
             {loading ? (
                 <p>loading...</p>
             ) : (
-                <div className="flex h-screen w-full">
+                <div className="flex h-screen w-full gap-6 mt-6">
                     {!leesLijst || leesLijst.length === 0 ? (
                         <p>Je hebt geen boeken in je leeslijst</p>
                     ) : (
@@ -23,7 +23,7 @@ export function ReadListPage(){
                                 auteur={leesLijst.Auteur}
                                 isRead={leesLijst.isRead}
                                 isBookmarked={leesLijst.isBookmarked}
-                                addToLeesLijst={() => addToLeesLijst}
+                                addToLeesLijst={() => addToLeesLijst(leesLijst.id, leesLijst.isBookmarked)}
                             />
                         ))
                     )}

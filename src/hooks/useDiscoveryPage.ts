@@ -29,7 +29,6 @@ export function useDiscoveryPage() {
 
         try{
             const data: Boek[] = await getBoekenByFilter(zoekTerm) ?? emptyBoekList;
-            console.log(data)
             setBoeken(data)
         }catch(error){
             console.log(error);
