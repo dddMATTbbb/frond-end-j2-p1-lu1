@@ -3,7 +3,7 @@ import {useReadListPage} from "../hooks/useReadListPage.ts";
 import BoekCard from "../components/BoekCard.tsx";
 
 export function ReadListPage(){
-    const {loading, leesLijst} = useReadListPage();
+    const {loading, leesLijst, addToLeesLijst} = useReadListPage();
 
 
     return (
@@ -21,6 +21,9 @@ export function ReadListPage(){
                                 id={leesLijst.id}
                                 titel={leesLijst.Titel}
                                 auteur={leesLijst.Auteur}
+                                isRead={leesLijst.isRead}
+                                isBookmarked={leesLijst.isBookmarked}
+                                addToLeesLijst={addToLeesLijst}
                             />
                         ))
                     )}

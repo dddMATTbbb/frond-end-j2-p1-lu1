@@ -5,14 +5,13 @@ interface BoekCardProps{
     titel:string;
     auteur:string;
     coverUrl?:string;
+    isBookmarked?:boolean;
+    isRead?:boolean;
+    addToLeesLijst: (boekId: string) => void;
 }
 
-export default function BoekCard({id, titel, auteur, coverUrl}: BoekCardProps){
-    const [liked, setLiked] = useState(false);
+export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmarked, addToLeesLijst}: BoekCardProps){
     const [read, setRead] = useState(false);
-    function handleBookmarkClick(){
-        setLiked(!liked);
-    }
 
     function handleReadClick(){
         setRead(!read);
@@ -33,15 +32,15 @@ export default function BoekCard({id, titel, auteur, coverUrl}: BoekCardProps){
                     </div>
                     <input
                         className={"shrink-0 h-10 w-auto"}
-                        onClick={handleBookmarkClick}
+                        onClick={() => addToLeesLijst(id)}
                         type={"image"}
-                        src={liked ? "../src/assets/BookmarkFilled.svg" : "../src/assets/Bookmark.svg"}
+                        src={isBookmarked ? "../src/assets/BookmarkFilled.svg" : "../src/assets/Bookmark.svg"}
                     />
                     <input
                         className={"shrink-0 h-10 w-auto"}
                         onClick={handleReadClick}
                         type={"image"}
-                        src={read ? "../src/assets/book_read.svg" : "../src/assets/book_unread.svg"}
+                        src={isRead ? "../src/assets/book_read.svg" : "../src/assets/book_unread.svg"}
                     />
                 </div>
             </div>

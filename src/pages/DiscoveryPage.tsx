@@ -9,7 +9,8 @@ export function DiscoveryPage() {
         loading,
         zoekTerm,
         setZoekTerm,
-        handleSubmit
+        handleSubmit,
+        addToLeesLijst
     } = useDiscoveryPage();
 
     return (
@@ -26,7 +27,7 @@ export function DiscoveryPage() {
             ) : (
                 <div className="flex items-start w-full p-10 flex-wrap gap-6">
                     {boeken.map((boek) => (
-                        <BoekCard id={boek.id} titel={boek.Titel} auteur={boek.Auteur} />
+                        <BoekCard id={boek.id} titel={boek.Titel} auteur={boek.Auteur} addToLeesLijst={() => addToLeesLijst(boek.id)} />
                     ))}
                 </div>
             )}

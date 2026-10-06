@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import type {Boek} from "../types/boeken.ts";
-import {getLeesLijst} from "../services/LeesLijstService.ts";
+import {getLeesLijst, addToLeesLijst} from "../services/LeesLijstService.ts";
 
 export function useReadListPage() {
     const [leesLijst, setLeesLijst] = useState<Boek[]>([]);
@@ -22,5 +22,5 @@ export function useReadListPage() {
         fetchLeesLijst()
     }, [])
 
-    return {leesLijst, loading}
+    return {leesLijst, loading, addToLeesLijst}
 }

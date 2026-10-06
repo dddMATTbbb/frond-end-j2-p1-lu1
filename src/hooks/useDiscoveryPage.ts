@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {getBoeken, getBoekenByFilter} from "../services/BoekenService.ts";
+import {addToLeesLijst} from "../services/LeesLijstService.ts";
 import type {Boek} from "../types/boeken.ts";
 
 export function useDiscoveryPage() {
@@ -38,5 +39,5 @@ export function useDiscoveryPage() {
     }
 
 
-    return {boeken, loading, zoekTerm, setZoekTerm, handleSubmit}
+    return {boeken, loading, zoekTerm, setZoekTerm, handleSubmit, addToLeesLijst}
 }
