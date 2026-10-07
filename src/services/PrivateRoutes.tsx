@@ -1,6 +1,5 @@
 import { Navigate, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import type { profileCheckResponse } from "../types/auth.ts";
 
 export const PrivateRoutes = () => {
     const [isAuth, setAuth] = useState<boolean | null>(null);
@@ -21,22 +20,6 @@ export const PrivateRoutes = () => {
                 }
 
                 setAuth(true);
-
-                const profileResponse = await fetch("http://localhost:3000/leesProfiel", {
-                    method: "GET",
-                    credentials: "include",
-                });
-
-                if (profileResponse.ok) {
-                    const data: profileCheckResponse = await profileResponse.json();
-
-                    if (
-                        data.message === "Leesprofiel does not exist" &&
-                        location.pathname !== "/LeesprofielQuestionPage"
-                    ) {
-                        navigate("/LeesprofielQuestionPage", { replace: true });
-                    }
-                }
             } catch (err) {
                 console.error("Fout bij toegangscontrole:", err);
                 setAuth(false);

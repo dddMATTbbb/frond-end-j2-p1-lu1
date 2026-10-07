@@ -8,6 +8,9 @@ import {ReadListPage} from "./pages/ReadListPage.tsx";
 import {NotFoundPage} from "./pages/NotFoundPage.tsx";
 import {PrivateRoutes} from "./services/PrivateRoutes.tsx"
 import {LeesprofielQuestionPage} from "./pages/LeesprofielQuestionPage.tsx";
+import DocentPanelPage from "./pages/DocentPanelPage.tsx";
+import {StudentRoutes} from "./services/StudentRoutes.tsx";
+import {DocentRoutes} from "./services/DocentRoutes.tsx";
 
 function App() {
   return (
@@ -16,13 +19,17 @@ function App() {
               <Route element={<Layout />} >
                   <Route path="/" element={<LandingPage/>}/>
                   <Route path={"*"} element={<NotFoundPage/>}/>
-
                   <Route element={<PrivateRoutes />}>
-                      <Route path="/VoorJou" element={<ForYouPage/>}/>
-                      <Route path="/Ontdekken" element={<DiscoveryPage/>}/>
-                      <Route path="/Profiel" element={<ProfilePage/>}/>
-                      <Route path="/LeesLijst" element={<ReadListPage/>}/>
-                      <Route path={"/LeesprofielQuestionPage"} element={<LeesprofielQuestionPage/>}/>
+                      <Route element={<StudentRoutes />}>
+                          <Route path="/VoorJou" element={<ForYouPage/>}/>
+                          <Route path="/Ontdekken" element={<DiscoveryPage/>}/>
+                          <Route path="/Profiel" element={<ProfilePage/>}/>
+                          <Route path="/LeesLijst" element={<ReadListPage/>}/>
+                          <Route path={"/LeesprofielQuestionPage"} element={<LeesprofielQuestionPage/>}/>
+                      </Route>
+                      <Route element={<DocentRoutes/>}>
+                          <Route path="/DocentPanel" element={<DocentPanelPage />}/>
+                      </Route>
                   </Route>
               </Route>
           </Routes>

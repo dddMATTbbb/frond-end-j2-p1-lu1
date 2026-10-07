@@ -47,7 +47,13 @@ function AuthCard(){
                 const response = await loginUser(credentials);
                 if(response.message === "Authentication successful"){
                     setError(null)
-                    navigate("/VoorJou", {replace: true});
+                    if(role === 'student'){
+                        console.log("going to VoorJou")
+                        navigate("/VoorJou", {replace: true});
+                    } else {
+                        console.log("going to /DocentPanel")
+                        navigate("/DocentPanel", {replace: true});
+                    }
                 } else if (response.error === "Ongeldige email of wachtwoord") {
                     setError("Sorry, de combinatie email en wachtwoord is incorrect.")
                 } else {
