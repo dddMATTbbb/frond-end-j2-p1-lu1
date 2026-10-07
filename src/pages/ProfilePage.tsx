@@ -2,9 +2,10 @@ import Navbar from "../components/Navbar.tsx";
 import {useProfilePage} from "../hooks/ProfilePageHook.ts";
 import SubmitFormButton from "../components/SubmitFormButton.tsx";
 import Modal from "../components/Modal.tsx";
+import LeesProfielQuestionsHtml from "../components/LeesProfielQuestionsHtml.tsx";
 
 export function ProfilePage() {
-    const {profiel, loading, onUpdateLeesProfiel, modal, closeModal, handleChange } = useProfilePage();
+    const {profiel, loading, onUpdateLeesProfiel, onAddingDocent, modal, closeModal, handleChange, handleChangeDocentForm } = useProfilePage();
 
     if (loading) {
         return (
@@ -18,80 +19,24 @@ export function ProfilePage() {
     return (
         <>
             <Navbar/>
-            <div className="flex h-screen w-full p-5">
-                <form onSubmit={onUpdateLeesProfiel}>
-                    <fieldset>
-                        <h2 className="text-xl">Profiel gegevens:</h2>
-                        <fieldset className="w-full">
-                            <label htmlFor="leeftijd">Leeftijd: </label>
-                            <input
-                                required
-                                className="border-b-2 outline-none"
-                                type="number"
-                                id="leeftijd"
-                                name="leeftijd"
-                                min="16"
-                                max="120"
-                                value={profiel?.leeftijd}
-                                onChange={handleChange}
-                            />
+            <div className="flex flex-col h-screen w-full p-5">
+                <div className="border-3 w-fit h-fit border-black rounded-md p-5 mb-10">
+                    <h2 className="font-bold mb-5 text-2xl">Verander je leesprofiel:</h2>
+                    <form onSubmit={onUpdateLeesProfiel}>
+                        <LeesProfielQuestionsHtml form={profiel} handleChange={handleChange} />
+                        <SubmitFormButton buttonText={"Updaten"} disabledVar={loading} />
+                    </form>
+                </div>
+                <div className="flex-col flex border-3 w-fit h-fit border-black rounded-md p-5">
+                    <h2 className="font-bold mb-5 text-2xl">Voeg een docent toe:</h2>
+                    <form onSubmit={onAddingDocent}>
+                        <fieldset>
+                            <input required className={"border-b-2 outline-none mr-6"}
+                                id={"email"} name={"email"} type={"text"} placeholder={"mail@domein.nl"} onChange={handleChangeDocentForm} />
+                            <SubmitFormButton buttonText={"Toevoegen"} disabledVar={loading} />
                         </fieldset>
-
-                        <fieldset className="w-full mt-5">
-                            <label htmlFor="gender">Gender: </label>
-                            <select
-                                required
-                                name="gender"
-                                id="gender"
-                                className="outline-none border-2 rounded-md"
-                                value={profiel?.gender}
-                                onChange={handleChange}
-                            >
-                                <option value=""></option>
-                                <option value="man">Man</option>
-                                <option value="vrouw">Vrouw</option>
-                                <option value="non-binair">Non-binair</option>
-                                <option value="anders">Anders</option>
-                            </select>
-                        </fieldset>
-
-                        <fieldset className="w-full mt-5">
-                            <label htmlFor="leesniveau">Leesniveau: </label>
-                            <select
-                                required
-                                name="leesniveau"
-                                id="leesniveau"
-                                className="outline-none border-2 rounded-md"
-                                value={profiel?.leesniveau}
-                                onChange={handleChange}
-                            >
-                                <option value=""></option>
-                                <option value="2F">2F</option>
-                                <option value="3F">3F</option>
-                                <option value="2/3F">2/3F</option>
-                            </select>
-                        </fieldset>
-
-                        <fieldset className="w-full mt-5">
-                            <label htmlFor="favorieteTypeMatariaal">Favoriete lees materiaal: </label>
-                            <select
-                                required
-                                name="favorieteTypeMatariaal"
-                                id="favorieteTypeMatariaal"
-                                className="outline-none border-2 rounded-md"
-                                value={profiel?.favorieteTypeMatariaal ?? ''}
-                                onChange={handleChange}
-                            >
-                                <option value=""></option>
-                                <option value="Boek - roman">Roman</option>
-                                <option value="Boek - thriller">Thriller</option>
-                                <option value="blogpost">Blogpost</option>
-                                <option value="tijdschrift">tijdschrift</option>
-                            </select>
-                        </fieldset>
-                    </fieldset>
-                    <SubmitFormButton buttonText={"Updaten"} disabledVar={loading} />
-                </form>
+                    </form>
+                </div>
                 <Modal
                     isOpen={modal.isOpen}
                     onClose={closeModal}

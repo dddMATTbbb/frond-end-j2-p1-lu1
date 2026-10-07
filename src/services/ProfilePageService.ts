@@ -23,3 +23,18 @@ export const updateLeesprofielData = async (leesprofiel: LeesProfiel) => {
         body: JSON.stringify(leesprofiel)
     })
 }
+
+export const addDocentToStudent = async (docentEmail: string) => {
+    try{
+        const response = await fetch('http://localhost:3000/addDocent?' + new URLSearchParams({
+            docentMail: docentEmail,
+        }).toString(),{
+            method: 'POST',
+            credentials: 'include',
+        })
+        return await response.json()
+    }catch(error){
+        console.log(error);
+        return error;
+    }
+}

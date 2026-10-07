@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserLeesprofielData, updateLeesprofielData } from "../services/ProfilePageService";
+import { getUserLeesprofielData, updateLeesprofielData, addDocentToStudent } from "../services/ProfilePageService";
 import { useModal } from "./useModal";
 import type { LeesProfiel } from "../types/leesProfiel";
 
@@ -15,6 +15,7 @@ export function useProfilePage() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const { modal, showModal, closeModal } = useModal();
+    const [docentEmail, setDocentEmail] = useState("");
 
     // data laden bij openen van de pagina
     useEffect(() => {
@@ -32,15 +33,38 @@ export function useProfilePage() {
         load();
     }, []);
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-        const { name, value } = e.target;
-        setProfiel((prev) => ({
-            ...prev,
-            [name]: name === "leeftijd" ? Number(value) : value,
-        }));
-    };
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>)=> {
+        const {name, value} = event.target;
+        setProfiel((prev) => ({...prev, [name]: value}));
+    }
+
+    const handleChangeDocentForm = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=> {
+        const {value} = event.target;
+        setDocentEmail(value);
+    }
+
+    async function onAddingDocent(event: React.SubmitEvent<HTMLFormElement>) {
+        event.preventDefault();
+        setLoading(true);
+
+        try{
+            const respone = await addDocentToStudent(docentEmail);
+            console.log(respone.message)
+            if (respone.message === "Docent gekoppeld") {
+                showModal("Gelukt!", "De docent is toegevoegd!", "success")
+            } else if(respone.message === "Docent email was not found in the db") {
+                showModal("Oeps", "De email die je hebt ingevuld is niet gekoppeld aan een docent, check of de email correct is", "error")
+            } else if(respone.message === "Koppeling bestaat al") {
+                showModal("Oeps", "De docent die je nu wou toevoegen is al toegevoegd", "error")
+            } else {
+                showModal("Oeps", "Er is iets fout gegeaan bij het toevoegen van de docent", "error")
+            }
+        } catch {
+            showModal("Oeps", "Er is iets fout gegeaan bij het toevoegen van de docent", "error")
+        } finally {
+            setLoading(false);
+        }
+    }
 
     async function onUpdateLeesProfiel(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -60,5 +84,5 @@ export function useProfilePage() {
         }
     }
 
-    return {profiel, loading, saving, onUpdateLeesProfiel, modal, closeModal, handleChange };
+    return {profiel, loading, saving, onUpdateLeesProfiel, onAddingDocent, modal, closeModal, handleChange, handleChangeDocentForm };
 }
