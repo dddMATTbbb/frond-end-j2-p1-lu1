@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getBoeken, getBoekenByFilter} from "../services/BoekenService.ts";
-import {addToLeesLijst} from "../services/LeesLijstService.ts";
+import {addToLeesLijst as addToLeesLijstApi} from "../services/LeesLijstService.ts";
 import type {Boek} from "../types/boeken.ts";
 
 export function useDiscoveryPage() {
@@ -34,6 +34,21 @@ export function useDiscoveryPage() {
             console.log(error);
         }finally{
             setLoading(false);
+        }
+    }
+
+    const addToLeesLijst = async (boekId: string, isBookmarked: boolean) => {
+        try{
+            await addToLeesLijstApi(boekId, isBookmarked);
+            setBoeken(prev =>
+                prev.map(boek =>
+                    boek.id === boekId
+                        ? {...boek, isBookmarked: !isBookmarked}
+                        : boek
+                )
+            );
+        }catch(error){
+            console.log(error);
         }
     }
 

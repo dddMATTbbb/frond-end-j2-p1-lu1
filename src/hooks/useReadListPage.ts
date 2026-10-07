@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import type {Boek} from "../types/boeken.ts";
-import {getLeesLijst, addToLeesLijst} from "../services/LeesLijstService.ts";
+import {getLeesLijst, addToLeesLijst as addToLeesLijstApi} from "../services/LeesLijstService.ts";
 
 export function useReadListPage() {
     const [leesLijst, setLeesLijst] = useState<Boek[]>([]);
@@ -21,6 +21,15 @@ export function useReadListPage() {
 
         fetchLeesLijst()
     }, [])
+
+    const addToLeesLijst = async (boekId: string, isBookmarked:boolean) => {
+        try{
+            await addToLeesLijstApi(boekId, isBookmarked);
+            setLeesLijst(prev => prev.filter(boek => boek.id !== boekId))
+        }catch(error){
+            console.error(error)
+        }
+    }
 
     return {leesLijst, loading, addToLeesLijst}
 }
