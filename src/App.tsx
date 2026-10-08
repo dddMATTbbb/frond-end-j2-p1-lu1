@@ -11,6 +11,7 @@ import {LeesprofielQuestionPage} from "./pages/LeesprofielQuestionPage.tsx";
 import DocentPanelPage from "./pages/DocentPanelPage.tsx";
 import {StudentRoutes} from "./services/StudentRoutes.tsx";
 import {DocentRoutes} from "./services/DocentRoutes.tsx";
+import ViewStudentPage from "./pages/ViewStudentPage.tsx";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                       </Route>
                       <Route element={<DocentRoutes/>}>
                           <Route path="/DocentPanel" element={<DocentPanelPage />}/>
+                          <Route path="/student/:id" element={<ViewStudentPage />}/>
                       </Route>
                   </Route>
               </Route>

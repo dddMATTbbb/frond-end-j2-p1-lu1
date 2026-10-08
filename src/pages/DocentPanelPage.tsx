@@ -3,7 +3,7 @@ import {useDocentPanel} from "../hooks/useDocentPanel.ts";
 import type {Student} from "../types/student.ts";
 
 export default function DocentPanelPage() {
-    const {loading, students} = useDocentPanel();
+    const {loading, students, onClickButton} = useDocentPanel();
     return (
         <>
             <div className="flex flex-col justify-center items-center h-screen w-full">
@@ -11,7 +11,7 @@ export default function DocentPanelPage() {
                 <div className="flex gap-5 h-screen w-full p-10">
                     {
                         students.map((student: Student) => (
-                            <StudentCard studentId={student.id} studentEmail={student.email} />
+                            <StudentCard key={student.id} onClickButton={() => onClickButton(student.id)} studentId={student.id} studentEmail={student.email} />
                         ))
                     }
                 </div>
