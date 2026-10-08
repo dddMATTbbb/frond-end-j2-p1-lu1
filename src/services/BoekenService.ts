@@ -35,3 +35,23 @@ export const getBoekenByFilter = async (zoekTerm: string) => {
         console.log(error);
     }
 }
+
+export const updateStatusBoeken = async (boekId:string, isRead?:boolean) => {
+    isRead = !isRead;
+    try{
+        const response = await fetch(`http://localhost:3000/leesLijst/status`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                boekId: boekId,
+                isRead: isRead,
+            })
+        })
+
+        const data:Boek[] = await response.json()
+        return data
+    }catch(error){
+        console.log(error);
+    }
+}

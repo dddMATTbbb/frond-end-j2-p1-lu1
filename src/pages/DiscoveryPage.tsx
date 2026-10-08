@@ -10,7 +10,8 @@ export function DiscoveryPage() {
         zoekTerm,
         setZoekTerm,
         handleSubmit,
-        addToLeesLijst
+        addToLeesLijst,
+        updateReadStatus
     } = useDiscoveryPage();
 
     return (
@@ -27,7 +28,17 @@ export function DiscoveryPage() {
             ) : (
                 <div className="flex items-start w-full p-10 flex-wrap gap-6">
                     {boeken.map((boek) => (
-                        <BoekCard key={boek.id} id={boek.id} isRead={boek.isRead} isBookmarked={boek.isBookmarked} titel={boek.Titel} auteur={boek.Auteur} addToLeesLijst={() => addToLeesLijst(boek.id, boek.isBookmarked)} />
+                        <BoekCard
+                            key={boek.id}
+                            id={boek.id}
+                            isRead={boek.isRead}
+                            isBookmarked={boek.isBookmarked}
+                            titel={boek.Titel}
+                            auteur={boek.Auteur}
+                            addToLeesLijst={() => addToLeesLijst(boek.id, boek.isBookmarked)}
+                            toggleRead={() => updateReadStatus(boek.id, boek.isRead)}
+                        />
+
                     ))}
                 </div>
             )}

@@ -45,25 +45,3 @@ export const addToLeesLijst = async (boekId: string, isBookmarked:boolean) => {
         throw error;
     }
 };
-
-// Past de 'wel/niet gelezen' (isRead) status aan voor een boek
-export const toggleLeesStatus = async (boekId: string, isRead?: boolean) => {
-    try {
-        const response = await fetch(`${API_BASE}/leesLijst/status`, {
-            method: "PATCH",
-            headers: { 'Content-Type': 'application/json' },
-            credentials: "include",
-            body: JSON.stringify({ boekId, isRead }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Fout bij bijwerken leesstatus: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Fout in toggleLeesStatus:", error);
-        throw error;
-    }
-};

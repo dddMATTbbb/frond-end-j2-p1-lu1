@@ -47,8 +47,9 @@ export default function useViewStudent(studentId: string | undefined){
                         : boek
                 )
             );
-        }catch(error){
-            console.log(error);
+        }catch (error) {
+            console.error(error);
+            throw error;
         }
 
     }

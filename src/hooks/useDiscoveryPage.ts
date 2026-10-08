@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getBoeken, getBoekenByFilter} from "../services/BoekenService.ts";
+import {getBoeken, getBoekenByFilter, updateStatusBoeken} from "../services/BoekenService.ts";
 import {addToLeesLijst as addToLeesLijstApi} from "../services/LeesLijstService.ts";
 import type {Boek} from "../types/boeken.ts";
 
@@ -49,9 +49,26 @@ export function useDiscoveryPage() {
             );
         }catch(error){
             console.log(error);
+            throw error;
+        }
+    }
+
+    const updateReadStatus = async (boekId: string, isRead?: boolean) => {
+        try{
+            await updateStatusBoeken(boekId, isRead);
+            setBoeken(prev =>
+                prev.map(boek =>
+                    boek.id === boekId
+                        ? {...boek, isRead: !isRead}
+                        : boek
+                )
+            );
+        }catch(error){
+            console.log(error);
+            throw error;
         }
     }
 
 
-    return {boeken, loading, zoekTerm, setZoekTerm, handleSubmit, addToLeesLijst}
+    return {boeken, loading, zoekTerm, setZoekTerm, handleSubmit, addToLeesLijst, updateReadStatus}
 }

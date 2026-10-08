@@ -1,5 +1,3 @@
-import {useState} from "react";
-
 interface BoekCardProps{
     id: string;
     titel:string;
@@ -8,13 +6,15 @@ interface BoekCardProps{
     isBookmarked:boolean;
     isRead?:boolean;
     addToLeesLijst: (boekId: string, isBookmarked:boolean) => void;
+    toggleRead?: (boekId: string, isRead:boolean) => void;
 }
 
-export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmarked, addToLeesLijst}: BoekCardProps){
-    const [read, setRead] = useState(false);
-
-    function handleReadClick(){
-        setRead(!read);
+export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmarked, addToLeesLijst, toggleRead}: BoekCardProps){
+    if(!isRead){
+        isRead = false;
+    }
+    if(!toggleRead){
+        toggleRead = () => "";
     }
 
     return (
@@ -38,7 +38,7 @@ export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmar
                     />
                     <input
                         className={"shrink-0 h-10 w-auto"}
-                        onClick={handleReadClick}
+                        onClick={() => toggleRead(id, isRead)}
                         type={"image"}
                         src={isRead ? "../src/assets/book_read.svg" : "../src/assets/book_unread.svg"}
                     />
