@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
-import type { profileCheckResponse } from "../types/auth.ts";
+import Spinner from "../components/Spinner.tsx";
 
 export const DocentRoutes = () => {
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ export const DocentRoutes = () => {
     if (isDocent === null) {
         return (
             <div className="flex h-screen w-full items-center justify-center">
-                <p className="text-lg">Laden...</p>
+                <Spinner />
             </div>
         );
     }
