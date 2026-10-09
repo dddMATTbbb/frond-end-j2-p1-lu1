@@ -2,6 +2,7 @@ import backArrow from "../assets/back_arrow.svg";
 import { useParams } from "react-router-dom";
 import useViewStudentPage from "../hooks/useViewStudent.ts";
 import BoekCard from "../components/BoekCard.tsx";
+import BoekCardSkeleton from "../components/BoekCardSkeleton.tsx";
 
 export default function ViewStudentPage() {
     const { id } = useParams<{ id: string }>();
@@ -14,7 +15,9 @@ export default function ViewStudentPage() {
             </header>
             <div className="flex items-start w-full p-10 flex-wrap gap-6">
                 {loading ? (
-                    <p>loading...</p>
+                    Array.from({ length: 8 }).map((_, i) => (
+                        <BoekCardSkeleton key={i} />
+                    ))
                 ) : (
                     <div className="flex items-start w-full p-10 flex-wrap gap-6">
                         {boeken.map((boek) => (
