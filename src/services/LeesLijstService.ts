@@ -25,6 +25,7 @@ export const getLeesLijst = async (): Promise<Boek[]> => {
 // Voegt een boek toe aan de persoonlijke leeslijst
 export const addToLeesLijst = async (boekId: string, isBookmarked:boolean) => {
     isBookmarked = !isBookmarked;
+    console.log(boekId, isBookmarked);
     try {
         const response = await fetch(`${API_BASE}/leesLijst`, {
             method: "POST",

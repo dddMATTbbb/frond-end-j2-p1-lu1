@@ -55,3 +55,22 @@ export const updateStatusBoeken = async (boekId:string, isRead?:boolean) => {
         console.log(error);
     }
 }
+
+export const getForYouBoeken = async ()=> {
+    try{
+        const response = await fetch(`http://localhost:3000/getVoorJou`, {
+            method: 'GET',
+            credentials: 'include',
+        })
+
+        if(!response.ok){
+            const error = await response.json()
+            throw new Error('getBoekenStudent Error' + error.message);
+        }
+
+        const data:Boek[] = await response.json()
+        return data
+    } catch (error){
+        console.log(error)
+    }
+}
