@@ -4,7 +4,7 @@ import {getStudents} from "../services/DocentService.ts";
 import type {Student} from "../types/student.ts";
 
 export function useDocentPanel() {
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [students, setStudents] = useState<Student[]>([]);
     const navigate = useNavigate();
 

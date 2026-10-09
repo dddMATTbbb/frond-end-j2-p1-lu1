@@ -1,6 +1,7 @@
 import StudentCard from "../components/StudentCard.tsx";
 import {useDocentPanel} from "../hooks/useDocentPanel.ts";
 import type {Student} from "../types/student.ts";
+import StudentCardSkeleton from "../components/StudentCardSkeleton.tsx";
 
 export default function DocentPanelPage() {
     const {loading, students, onClickButton} = useDocentPanel();
@@ -9,11 +10,15 @@ export default function DocentPanelPage() {
             <div className="flex flex-col justify-center items-center h-screen w-full">
                 <h1 className={'text-2xl font-bold'}>Docent panel</h1>
                 <div className="flex gap-5 h-screen w-full p-10">
-                    {
+                    {loading ? (
+                        Array.from({ length: 5 }).map((_, i) => (
+                            <StudentCardSkeleton key={i} />
+                        ))
+                    ) : (
                         students.map((student: Student) => (
                             <StudentCard key={student.id} onClickButton={() => onClickButton(student.id)} studentId={student.id} studentEmail={student.email} />
                         ))
-                    }
+                    )}
                 </div>
             </div>
         </>
