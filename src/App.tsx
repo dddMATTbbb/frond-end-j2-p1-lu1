@@ -12,6 +12,7 @@ import DocentPanelPage from "./pages/DocentPanelPage.tsx";
 import {StudentRoutes} from "./services/StudentRoutes.tsx";
 import {DocentRoutes} from "./services/DocentRoutes.tsx";
 import ViewStudentPage from "./pages/ViewStudentPage.tsx";
+import BoekPage from "./pages/BoekPage.tsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route element={<Layout />} >
                   <Route path="/" element={<LandingPage/>}/>
                   <Route path={"*"} element={<NotFoundPage/>}/>
+                  <Route path={"/boek/:boekId"} element={<BoekPage/>}/>
                   <Route element={<PrivateRoutes />}>
                       <Route element={<StudentRoutes />}>
                           <Route path="/VoorJou" element={<ForYouPage/>}/>

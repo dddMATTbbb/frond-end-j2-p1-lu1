@@ -74,3 +74,20 @@ export const getForYouBoeken = async ()=> {
         console.log(error)
     }
 }
+
+export const getBoek = async (boekId:string) => {
+    try{
+        const response = await fetch(`http://localhost:3000/boek?boekId=${boekId}`, {
+            method: 'GET',
+        })
+
+        if (!response.ok) {
+            console.error(` get boek request mislukt: ${response.status}`);
+        }
+
+        const data:Boek = await response.json()
+        return data
+    }catch(error){
+        console.log(error);
+    }
+}

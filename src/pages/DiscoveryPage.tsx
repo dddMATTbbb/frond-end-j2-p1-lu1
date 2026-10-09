@@ -26,7 +26,7 @@ export function DiscoveryPage() {
             />
             <div className="flex items-start w-full p-10 flex-wrap gap-6">
                 {loading
-                    ? Array.from({ length: 8 }).map((_, i) => (
+                    ? Array.from({ length: 30 }).map((_, i) => (
                         <BoekCardSkeleton key={i} />
                     ))
                     : boeken.map((boek) => (

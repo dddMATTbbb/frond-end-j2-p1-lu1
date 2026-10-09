@@ -1,3 +1,5 @@
+import {useBoekCard} from "../hooks/useBoekCard.ts";
+
 interface BoekCardProps{
     id: string;
     titel:string;
@@ -17,9 +19,11 @@ export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmar
         toggleRead = () => "";
     }
 
+    const {goToBoekInfo} = useBoekCard()
+
     return (
         <>
-            <div className="flex flex-col justify-center items-center border-black border-2 rounded-md w-60 h-96 p-5">
+            <div onClick={() => goToBoekInfo(id)} className="flex flex-col justify-center items-center border-black border-2 rounded-md w-60 h-96 p-5">
                 <img
                     src={coverUrl ?? "../src/assets/defaultBookCover.jpg"}
                     loading="lazy"
