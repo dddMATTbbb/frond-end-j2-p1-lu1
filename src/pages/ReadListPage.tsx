@@ -12,7 +12,7 @@ export function ReadListPage(){
             {loading ? (
                 <p>loading...</p>
             ) : (
-                <div className="flex h-screen w-full gap-6 mt-6">
+                <div className="flex items-start w-full p-10 flex-wrap gap-6 mt-6">
                     {!leesLijst || leesLijst.length === 0 ? (
                         <p>Je hebt geen boeken in je leeslijst</p>
                     ) : (

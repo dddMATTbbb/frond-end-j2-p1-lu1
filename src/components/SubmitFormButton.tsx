@@ -1,6 +1,7 @@
 interface Props {
     buttonText: string
     disabledVar: boolean
+    alt:string
 }
 
 export default function SubmitFormButton(props: Props) {

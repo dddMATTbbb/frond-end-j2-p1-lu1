@@ -11,8 +11,8 @@ export function useDocentPanel() {
     useEffect(() => {
         async function loadStudentData() {
             try{
-                const students:Student[] = await getStudents()
-                setStudents(students)
+                const studentsRes:Student[] = await getStudents()
+                setStudents(studentsRes)
             } catch (error){
                 console.error(error);
             } finally {

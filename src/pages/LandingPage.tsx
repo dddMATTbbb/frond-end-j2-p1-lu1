@@ -1,9 +1,6 @@
 import AuthCard from "../components/AuthCard.tsx";
-import {useState} from "react";
 
 export function LandingPage() {
-    const [typeAuthLogin, setTypeAuthLogin] = useState<boolean>(true);
-
     return (
         <>
             <div className="flex justify-center items-center h-screen w-full flex-col">

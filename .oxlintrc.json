@@ -9,6 +9,7 @@
 
   "rules": {
     "react/rules-of-hooks": "error",
+    "react/react-in-jsx-scope": "off",
     "react/only-export-components": ["warn", { "allowConstantExport": true }]
   }
 }

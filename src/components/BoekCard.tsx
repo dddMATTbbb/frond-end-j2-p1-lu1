@@ -1,4 +1,9 @@
 import {useBoekCard} from "../hooks/useBoekCard.ts";
+import coverImg from "../assets/defaultBookCover.jpg"
+import bookRead from "../assets/book_read.svg"
+import bookUnread from "../assets/book_unread.svg"
+import bookmark from "../assets/bookmark.svg"
+import bookmarkFilled from "../assets/bookmarkFilled.svg"
 
 interface BoekCardProps{
     id: string;
@@ -23,31 +28,36 @@ export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmar
 
     return (
         <>
-            <div onClick={() => goToBoekInfo(id)} className="flex flex-col justify-center items-center border-black border-2 rounded-md w-60 h-96 p-5">
-                <img
-                    src={coverUrl ?? "../src/assets/defaultBookCover.jpg"}
-                    loading="lazy"
-                    className="w-full h-auto rounded-md"
-                />
-                <div className="flex flex-row items-end justify-between w-full mt-2">
-                    <div className="grow min-w-0">
-                        <h3 className="font-semibold truncate">{titel}</h3>
-                        <p className="text-gray-600">{auteur}</p>
+            <button onClick={() => goToBoekInfo(id)}>
+                <div className="flex flex-col justify-center items-center border-black border-2 rounded-md w-60 h-96 p-5">
+                    <img
+                        src={coverUrl ?? coverImg}
+                        loading="lazy"
+                        className="w-full h-auto rounded-md"
+                        alt={""}
+                    />
+                    <div className="flex flex-row items-end justify-between w-full mt-2">
+                        <div className="grow min-w-0">
+                            <h3 className="font-semibold truncate">{titel}</h3>
+                            <p className="text-gray-600">{auteur}</p>
+                        </div>
+                        <input
+                            className={"shrink-0 h-10 w-auto"}
+                            onClick={() => addToLeesLijst(id, isBookmarked)}
+                            type={"image"}
+                            src={isBookmarked ? bookmarkFilled : bookmark}
+                            alt={"Bookmark knop"}
+                        />
+                        <input
+                            className={"shrink-0 h-10 w-auto"}
+                            onClick={() => toggleRead(id, isRead)}
+                            type={"image"}
+                            src={isRead ? bookRead : bookUnread}
+                            alt={"Is gelezen knop"}
+                        />
                     </div>
-                    <input
-                        className={"shrink-0 h-10 w-auto"}
-                        onClick={() => addToLeesLijst(id, isBookmarked)}
-                        type={"image"}
-                        src={isBookmarked ? "../src/assets/BookmarkFilled.svg" : "../src/assets/Bookmark.svg"}
-                    />
-                    <input
-                        className={"shrink-0 h-10 w-auto"}
-                        onClick={() => toggleRead(id, isRead)}
-                        type={"image"}
-                        src={isRead ? "../src/assets/book_read.svg" : "../src/assets/book_unread.svg"}
-                    />
                 </div>
-            </div>
+            </button>
         </>
     )
 }

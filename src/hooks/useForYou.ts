@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react'
 import {getForYouBoeken, updateStatusBoeken} from "../services/BoekenService.ts";
 import type {Boek} from "../types/boeken.ts";
 import {addToLeesLijst as addToLeesLijstApi} from "../services/LeesLijstService.ts";
-import {data} from "react-router-dom";
 
 export default function useForYou() {
     const [loading, setLoading] = useState(true)

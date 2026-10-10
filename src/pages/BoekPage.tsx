@@ -2,8 +2,6 @@ import backArrow from "../assets/back_arrow.svg";
 import { useParams } from "react-router-dom";
 import {UseBoekPage} from "../hooks/UseBoekPage.ts";
 import BoekRegelsSkeleton from "../components/BoekRegelsSkeleton.tsx";
-import BoekCardSkeleton from "../components/BoekCardSkeleton.tsx";
-import BoekCard from "../components/BoekCard.tsx";
 
 export default function BoekPage(){
     const { boekId } = useParams<{ boekId: string }>();

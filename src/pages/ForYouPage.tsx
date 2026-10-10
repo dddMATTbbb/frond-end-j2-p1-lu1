@@ -14,16 +14,18 @@ export function ForYouPage() {
                         <BoekCardSkeleton key={i} />
                     ))
                     : boeken.map((boek) => (
-                        <BoekCard
-                            key={boek.id}
-                            id={boek.id}
-                            isRead={boek.isRead}
-                            isBookmarked={boek.isBookmarked}
-                            titel={boek.Titel}
-                            auteur={boek.Auteur}
-                            addToLeesLijst={() => addToLeesLijst(boek.id, boek.isBookmarked)}
-                            toggleRead={() => updateReadStatus(boek.id, boek.isRead)}
-                        />
+                        <>
+                            <BoekCard
+                                key={boek.id}
+                                id={boek.id}
+                                isRead={boek.isRead}
+                                isBookmarked={boek.isBookmarked}
+                                titel={boek.Titel}
+                                auteur={boek.Auteur}
+                                addToLeesLijst={() => addToLeesLijst(boek.id, boek.isBookmarked)}
+                                toggleRead={() => updateReadStatus(boek.id, boek.isRead)}
+                            />
+                        </>
                     ))}
             </div>
         </>
