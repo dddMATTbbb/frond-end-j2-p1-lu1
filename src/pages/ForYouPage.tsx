@@ -8,7 +8,7 @@ export function ForYouPage() {
     return (
         <>
             <Navbar/>
-            <div className="flex justify-center items-center h-screen w-full gap-10">
+            <div className="flex items-start w-full p-10 flex-wrap gap-6">
                 {loading
                     ? Array.from({ length: 3 }).map((_, i) => (
                         <BoekCardSkeleton key={i} />

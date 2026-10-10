@@ -19,7 +19,7 @@ function AuthCard(){
 
     return (
         <>
-            <div className="flex justify-center items-center h-auto min-h-[50%] w-1/4 border-4 rounded-4xl flex-col px-12 py-8">
+            <div className="flex justify-center items-center h-auto min-h-[50%] w-64 border-4 rounded-4xl flex-col px-12 py-8">
                 <p className="font-bold text-3xl">{authUi.title}</p>
 
                 {error && <p className="text-red-500 mt-4 text-sm">{error}</p>}
