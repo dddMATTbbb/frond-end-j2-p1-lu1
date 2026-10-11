@@ -1,6 +1,6 @@
 import type {Boek} from "../types/boeken.ts";
 
-export const getBoeken = async () => {
+export const getBoeken = async ():Promise<Boek[]> => {
     try{
         const response = await fetch('http://localhost:3000/boeken', {
             method: 'GET',
@@ -14,6 +14,7 @@ export const getBoeken = async () => {
         return data
     }catch(error){
         console.log(error);
+        return [];
     }
 }
 
