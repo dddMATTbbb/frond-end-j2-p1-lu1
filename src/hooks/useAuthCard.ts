@@ -56,8 +56,7 @@ export function useAuthCard() {
                     }
                 } else if (response.error === "Ongeldige email of wachtwoord") {
                     setError("Sorry, de combinatie email en wachtwoord is incorrect.")
-                } else {
-                    console.log(response.error);
+                } else if (response.message === "service_unavailable") {
                     setError("Sorry er is een fout opgetreden in onze service, probeer het later opnieuw");
                 }
             }
