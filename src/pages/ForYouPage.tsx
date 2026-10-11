@@ -5,14 +5,13 @@ import BoekCard from "../components/BoekCard.tsx";
 
 export function ForYouPage() {
     const {loading, boeken, updateReadStatus, addToLeesLijst} = useForYou();
+    const SKELETON_KEYS = Array.from({ length: 30 }, (_, i) => `skeleton-${i}`);
     return (
         <>
             <Navbar/>
             <div className="flex items-start w-full p-10 flex-wrap gap-6">
                 {loading
-                    ? Array.from({ length: 3 }).map((_, i) => (
-                        <BoekCardSkeleton key={i} />
-                    ))
+                    ? SKELETON_KEYS.map((key) => <BoekCardSkeleton key={key} />)
                     : boeken.map((boek) => (
                         <>
                             <BoekCard

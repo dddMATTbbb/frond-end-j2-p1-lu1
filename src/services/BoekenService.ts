@@ -18,7 +18,7 @@ export const getBoeken = async ():Promise<Boek[]> => {
     }
 }
 
-export const getBoekenByFilter = async (zoekTerm: string) => {
+export const getBoekenByFilter = async (zoekTerm: string):Promise<Boek[]> => {
     try{
         const response = await fetch('http://localhost:3000/boeken?' + new URLSearchParams({
             zoekTerm: zoekTerm,
@@ -34,6 +34,7 @@ export const getBoekenByFilter = async (zoekTerm: string) => {
         return data
     }catch(error){
         console.log(error);
+        return [];
     }
 }
 
@@ -78,17 +79,19 @@ export const getForYouBoeken = async ()=> {
 
 export const getBoek = async (boekId:string) => {
     try{
-        const response = await fetch(`http://localhost:3000/boek?boekId=${boekId}`, {
+        const response = await fetch(`http://localhost:3000/boek?boekId=${encodeURIComponent(boekId)}`, {
             method: 'GET',
         })
 
         if (!response.ok) {
             console.error(` get boek request mislukt: ${response.status}`);
+            return undefined;
         }
 
         const data:Boek = await response.json()
         return data
     }catch(error){
         console.log(error);
+        return undefined;
     }
 }

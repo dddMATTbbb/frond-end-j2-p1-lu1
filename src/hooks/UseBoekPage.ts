@@ -3,29 +3,34 @@ import type {Boek} from "../types/boeken.ts";
 import {getBoek} from "../services/BoekenService.ts";
 import {useNavigate} from "react-router-dom";
 
-export function UseBoekPage(studentId: string | undefined) {
+export function useBoekPage(boekId: string | undefined) {
     const [loading, setLoading] = useState<boolean>(true);
-    const [boek, setBoek] = useState<Boek | undefined>(undefined);
+    const [boek, setBoek] = useState<Boek | undefined>();
     const navigate = useNavigate();
 
     useEffect(() => {
-        async function getBoekData() {
-            try{
-                if(!studentId) {
-                    return;
-                }
-                const data:Boek | undefined = await getBoek(studentId);
-                setBoek(data);
-                console.log(boek);
-            }catch(err){
+        if (!boekId) return;
+
+        let cancelled = false;
+
+        async function getBoekData(id: string) {
+            setLoading(true);
+            try {
+                const data = await getBoek(id);
+                if (!cancelled) setBoek(data);
+            } catch (err) {
                 console.log(err);
-            }finally {
-                setLoading(false);
+            } finally {
+                if (!cancelled) setLoading(false);
             }
         }
 
-        getBoekData()
-    }, [])
+        getBoekData(boekId);
+
+        return () => {
+            cancelled = true;
+        };
+    }, [boekId]);
 
     const handleBackButtonClick = () => {
         navigate(-1);

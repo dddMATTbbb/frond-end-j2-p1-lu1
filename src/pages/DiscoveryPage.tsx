@@ -16,7 +16,9 @@ export function DiscoveryPage() {
         updateReadStatus
     } = useDiscoveryPage();
 
-    if(unableToLoadBoeken) {
+    const SKELETON_KEYS = Array.from({ length: 30 }, (_, i) => `skeleton-${i}`);
+
+    if(!unableToLoadBoeken) {
         return (
             <>
                 <div className="flex items-center justify-center h-full w-full flex-col">
@@ -39,9 +41,7 @@ export function DiscoveryPage() {
             />
             <div className="flex items-start w-full p-10 flex-wrap gap-6">
                 {loading
-                    ? Array.from({ length: 30 }).map((_, i) => (
-                        <BoekCardSkeleton key={i} />
-                    ))
+                    ? SKELETON_KEYS.map((key) => <BoekCardSkeleton key={key} />)
                     : boeken.map((boek) => (
                         <BoekCard
                             key={boek.id}

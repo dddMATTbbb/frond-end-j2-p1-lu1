@@ -1,9 +1,10 @@
 import { Navigate, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {useState, useEffect, use} from "react";
 
 export const PrivateRoutes = () => {
     const [isAuth, setAuth] = useState<boolean | null>(null);
     const navigate = useNavigate();
+    const pathname = useLocation();
     const location = useLocation();
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export const PrivateRoutes = () => {
         };
 
         validateAccess();
-    }, [location.pathname, navigate]);
+    }, [pathname, navigate]);
 
     if (isAuth === null) {
         return (

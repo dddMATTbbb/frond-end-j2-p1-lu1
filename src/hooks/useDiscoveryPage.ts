@@ -8,25 +8,23 @@ export function useDiscoveryPage() {
     const [loading, setLoading] = useState(true);
     const [zoekTerm, setZoekTerm] = useState("");
     const [unableToLoadBoeken, setUnableToLoadBoeken] = useState(false);
-    const emptyBoekList: Boek[] = []
 
     useEffect(() => {
         async function loadBoeken() {
             try{
-                const data: Boek[] = await getBoeken() ?? emptyBoekList;
+                const data: Boek[] = await getBoeken();
                 setBoeken(data)
+                if(!data){
+                    setUnableToLoadBoeken(true);
+                }
             }catch(error){
                 console.log(error);
+                setUnableToLoadBoeken(true);
             }finally{
                 setLoading(false);
             }
         }
         loadBoeken();
-
-        if(boeken.length == 0){
-            setUnableToLoadBoeken(true);
-        }
-
     }, [])
 
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
@@ -34,8 +32,8 @@ export function useDiscoveryPage() {
         setLoading(true);
 
         try{
-            const data: Boek[] = await getBoekenByFilter(zoekTerm) ?? emptyBoekList;
-            setBoeken(data)
+            const data: Boek[] = await getBoekenByFilter(zoekTerm)
+            setBoeken(data ?? [])
         }catch(error){
             console.log(error);
         }finally{

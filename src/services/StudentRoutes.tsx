@@ -1,10 +1,11 @@
-import { Navigate, Outlet, useNavigate} from "react-router-dom";
+import {Navigate, Outlet, useLocation, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import type { profileCheckResponse } from "../types/auth.ts";
 import Spinner from "../components/Spinner.tsx";
 
 export const StudentRoutes = () => {
     const navigate = useNavigate();
+    const {pathname} = useLocation();
     const [isStudent, setIsStudent] = useState<boolean | null>(null);
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export const StudentRoutes = () => {
 
                     if (
                         data.message === "Leesprofiel does not exist" &&
-                        location.pathname !== "/LeesprofielQuestionPage"
+                        pathname !== "/LeesprofielQuestionPage"
                     ) {
                         navigate("/LeesprofielQuestionPage", { replace: true });
                     }
@@ -46,7 +47,7 @@ export const StudentRoutes = () => {
         }
 
         validateStudent();
-    }, [location.pathname, navigate])
+    }, [pathname, navigate])
 
     if (isStudent === null) {
         return (

@@ -2,12 +2,14 @@ import type {LeesProfiel} from "../types/leesProfiel.ts";
 
 export const submitForm = async (leesProfiel: LeesProfiel) => {
     try{
-       return await fetch( "http://localhost:3000/leesProfiel", {
+       const response =  await fetch( "http://localhost:3000/leesProfiel", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: "include",
             body: JSON.stringify(leesProfiel)
         });
+
+       return await response.json();
     } catch( err){
         return err;
     }

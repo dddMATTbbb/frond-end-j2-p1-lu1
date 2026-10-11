@@ -17,7 +17,7 @@ export const getStudents = async() => {
     }
 }
 
-export const getBoekenStudent = async(id: string) => {
+export const getBoekenStudent = async(id: string):Promise<Boek[]> => {
     try{
         const response = await fetch(`http://localhost:3000/getBoekenStudent?studentId=${id}`, {
             method: "GET",
@@ -26,13 +26,14 @@ export const getBoekenStudent = async(id: string) => {
 
         if(!response.ok){
             const error = await response.json()
-            throw new Error('getBoekenStudent Error' + error.message);
+            return []
         }
 
         const data: Boek[] = await response.json();
         return data
     } catch (error){
         console.error(error);
+        return []
     }
 }
 

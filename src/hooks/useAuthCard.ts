@@ -76,8 +76,6 @@ export function useAuthCard() {
                     setError("Er is iets mis gegaan")
                 }
             }
-        } catch (err: any) {
-
         } finally {
             setLoading(false);
         }

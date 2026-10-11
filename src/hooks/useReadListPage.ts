@@ -6,12 +6,11 @@ import {updateStatusBoeken} from "../services/BoekenService.ts";
 export function useReadListPage() {
     const [leesLijst, setLeesLijst] = useState<Boek[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const emptyLeesLijst: Boek[] = []
 
     useEffect(() => {
         async function fetchLeesLijst() {
             try{
-                const data:Boek[] = await getLeesLijst() ?? emptyLeesLijst
+                const data:Boek[] = await getLeesLijst()
                 setLeesLijst(data)
             }catch(error){
                 console.error(error)

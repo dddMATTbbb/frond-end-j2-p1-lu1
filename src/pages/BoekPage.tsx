@@ -1,11 +1,11 @@
 import backArrow from "../assets/back_arrow.svg";
 import { useParams } from "react-router-dom";
-import {UseBoekPage} from "../hooks/UseBoekPage.ts";
+import {useBoekPage} from "../hooks/UseBoekPage.ts";
 import BoekRegelsSkeleton from "../components/BoekRegelsSkeleton.tsx";
 
 export default function BoekPage(){
     const { boekId } = useParams<{ boekId: string }>();
-    const {loading, boek, handleBackButtonClick} = UseBoekPage(boekId)
+    const {loading, boek, handleBackButtonClick} = useBoekPage(boekId)
 
     return (
         <>

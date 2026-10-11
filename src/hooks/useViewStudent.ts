@@ -7,20 +7,19 @@ export default function useViewStudent(studentId: string | undefined){
     const navigate = useNavigate();
     const [boeken, setBoeken] = useState<Boek[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
-    const emptyBoekList: Boek[] = []
 
     useEffect(() => {
         async function loadBoeken(){
             try{
                 setLoading(true);
                 if(!studentId){
-                    return emptyBoekList;
+                    return [];
                 }
-                const data: Boek[] = await getBoekenStudent(studentId) ?? emptyBoekList;
+                const data: Boek[] = await getBoekenStudent(studentId)
                 setBoeken(data);
             } catch (error){
                 console.log(error);
-                return emptyBoekList;
+                return [];
             }finally {
                 setLoading(false);
             }
