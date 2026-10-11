@@ -10,7 +10,7 @@ export const loginUser = async (credentials: AuthCredentials) => {
         });
 
         return response.json();
-    } catch(error) {
+    } catch {
         return {message: "service_unavailable"}
     }
 };

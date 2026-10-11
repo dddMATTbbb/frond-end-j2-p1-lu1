@@ -14,13 +14,9 @@ export const submitForm = async (leesProfiel: LeesProfiel) => {
 }
 
 export const getForm = async () => {
-    try{
         return await fetch( "http://localhost:3000/leesProfiel", {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: "include",
         });
-    }catch(err){
-        throw err;
-    }
 }

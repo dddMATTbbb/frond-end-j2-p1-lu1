@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar.tsx";
 import {useReadListPage} from "../hooks/useReadListPage.ts";
 import BoekCard from "../components/BoekCard.tsx";
+import BoekCardSkeleton from "../components/BoekCardSkeleton.tsx";
 
 export function ReadListPage(){
     const {loading, leesLijst, addToLeesLijst, updateReadStatus} = useReadListPage();
@@ -9,9 +10,10 @@ export function ReadListPage(){
     return (
         <>
             <Navbar />
-            {loading ? (
-                <p>loading...</p>
-            ) : (
+            {loading ?
+                Array.from({ length: 30 }).map((_, i) => (
+                <BoekCardSkeleton key={i} />
+            )) : (
                 <div className="flex items-start w-full p-10 flex-wrap gap-6 mt-6">
                     {!leesLijst || leesLijst.length === 0 ? (
                         <p>Je hebt geen boeken in je leeslijst</p>

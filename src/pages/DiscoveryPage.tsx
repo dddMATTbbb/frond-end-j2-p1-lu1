@@ -3,7 +3,6 @@ import BoekCard from "../components/BoekCard.tsx";
 import {useDiscoveryPage} from "../hooks/useDiscoveryPage.ts";
 import DiscoveryPageFilterBar from "../components/DiscoveryPageFilterBar.tsx";
 import BoekCardSkeleton from "../components/BoekCardSkeleton.tsx";
-import Modal from "../components/Modal.tsx";
 
 export function DiscoveryPage() {
     const {
