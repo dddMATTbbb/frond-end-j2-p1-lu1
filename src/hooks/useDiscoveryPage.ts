@@ -7,6 +7,7 @@ export function useDiscoveryPage() {
     const [boeken, setBoeken] = useState<Boek[]>([]);
     const [loading, setLoading] = useState(true);
     const [zoekTerm, setZoekTerm] = useState("");
+    const [unableToLoadBoeken, setUnableToLoadBoeken] = useState(false);
     const emptyBoekList: Boek[] = []
 
     useEffect(() => {
@@ -21,6 +22,11 @@ export function useDiscoveryPage() {
             }
         }
         loadBoeken();
+
+        if(boeken.length == 0){
+            setUnableToLoadBoeken(true);
+        }
+
     }, [])
 
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
@@ -70,5 +76,5 @@ export function useDiscoveryPage() {
     }
 
 
-    return {boeken, loading, zoekTerm, setZoekTerm, handleSubmit, addToLeesLijst, updateReadStatus}
+    return {boeken, loading, zoekTerm, unableToLoadBoeken, setZoekTerm, handleSubmit, addToLeesLijst, updateReadStatus}
 }

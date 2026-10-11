@@ -21,7 +21,6 @@ export function useAuthCard() {
         changeAuthTypeButtonText: "Login",
     }
 
-    //const [authUi, setAuthUi] = useState<AuthUi>(loginUi);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -89,5 +88,18 @@ export function useAuthCard() {
         setTypeAuthLogin(prev => !prev);
     };
 
-    return {email, password, role, error, isSignSucces, loading, authUi, handleAuthChange, setIsSignSucces, handleAuth, setEmail, setPassword, handleRadioChange}
+    return {
+        email,
+        password,
+        role,
+        error,
+        isSignSucces,
+        loading,
+        authUi,
+        handleAuthChange,
+        setIsSignSucces,
+        handleAuth,
+        setEmail,
+        setPassword,
+        handleRadioChange}
 }
