@@ -1,32 +1,29 @@
-# React + TypeScript + Vite
+# Kiesboek frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React- en TypeScript-frontend gebouwd met Vite.
 
-Currently, two official plugins are available:
+## Lokaal ontwikkelen
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm ci
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+De frontend verwacht voor normale handmatige ontwikkeling een backend op `http://localhost:3000`.
+
+## Kwaliteitscontroles
+
+| Controle | Commando | Doel |
+| --- | --- | --- |
+| Lint | `npm run lint` | Oxlint controleert de broncode met regels voor correctness, verdachte patronen en performance. De configuratie staat in `.oxlintrc.json`. |
+| Unit-tests | `npm run test:run` | Bestaande servicetests controleren API-aanroepen, responses en foutafhandeling. Er zijn voor deze kwaliteitsinrichting geen nieuwe unit-tests toegevoegd. |
+| End-to-endtests | `npm run test:e2e` | Playwright controleert de studentreis van inloggen tot zoeken en toevoegen aan de leeslijst, plus de redirect voor niet-ingelogde bezoekers. API-verzoeken worden gemockt voor snelle, herhaalbare tests zonder backend of testaccounts. |
+| Productiebuild | `npm run build` | TypeScript-controle en Vite-productiebundel signaleren integratie- en compileerfouten. |
+
+Deze verdeling richt de meeste testinspanning op de flows met direct gebruikersbelang: authenticatie, toegang tot afgeschermde pagina's en het vinden en bewaren van boeken. Unit-tests blijven geschikt voor kleine serviceregels en API-contracten. Alle broncode wordt gelint, omdat consistente statische controle breed helpt en weinig onderhoud vraagt.
+
+Playwright-configuratie staat in `playwright.config.ts`; tests staan in `e2e/`. De unit-testconfiguratie staat in `vite.config.ts`.
+
+## Continuous integration
+
+GitHub Actions voert linting, de bestaande unit-tests, de productiebuild en de browsertests uit bij iedere push en pull request. De workflow staat in `.github/workflows/ci.yml` en installeert Chromium op de runner. De browsertests gebruiken gemockte backendantwoorden en hebben geen secrets of externe testomgeving nodig.

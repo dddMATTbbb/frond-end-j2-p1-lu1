@@ -24,7 +24,7 @@ export function ProfilePage() {
                     <h2 className="font-bold mb-5 text-2xl">Verander je leesprofiel:</h2>
                     <form onSubmit={onUpdateLeesProfiel}>
                         <LeesProfielQuestionsHtml form={profiel} handleChange={handleChange} />
-                        <SubmitFormButton buttonText={"Updaten"} disabledVar={loading} />
+                        <SubmitFormButton buttonText={"Updaten"} disabledVar={loading} alt={"Profiel updaten"} />
                     </form>
                 </div>
                 <div className="flex-col flex border-3 w-fit h-fit border-black rounded-md p-5">
@@ -33,7 +33,7 @@ export function ProfilePage() {
                         <fieldset>
                             <input required className={"border-b-2 outline-none mr-6"}
                                 id={"email"} name={"email"} type={"text"} placeholder={"mail@domein.nl"} onChange={handleChangeDocentForm} />
-                            <SubmitFormButton buttonText={"Toevoegen"} disabledVar={loading} />
+                            <SubmitFormButton buttonText={"Toevoegen"} disabledVar={loading} alt={"Docent toevoegen"} />
                         </fieldset>
                     </form>
                 </div>

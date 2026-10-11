@@ -21,7 +21,7 @@ export default function DiscoveryPageFilterBar({ zoekTerm, setZoekTerm, handleSu
                             className={"border-2 focus:border-blue-400 outline-0 duration-500 rounded-3xl p-2 w-110 mr-3"}
                             onChange={(event) => {setZoekTerm(event.target.value)}}
                         />
-                        <SubmitFormButton disabledVar={loading} buttonText={"Zoeken"} />
+                        <SubmitFormButton disabledVar={loading} buttonText={"Zoeken"} alt={"Zoeken"} />
                     </div>
                 </form>
             </div>

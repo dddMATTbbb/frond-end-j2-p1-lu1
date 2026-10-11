@@ -2,8 +2,8 @@ import {useBoekCard} from "../hooks/useBoekCard.ts";
 import coverImg from "../assets/defaultBookCover.jpg"
 import bookRead from "../assets/book_read.svg"
 import bookUnread from "../assets/book_unread.svg"
-import bookmark from "../assets/bookmark.svg"
-import bookmarkFilled from "../assets/bookmarkFilled.svg"
+import bookmark from "../assets/Bookmark.svg"
+import bookmarkFilled from "../assets/BookmarkFilled.svg"
 
 interface BoekCardProps{
     id: string;
@@ -43,14 +43,20 @@ export default function BoekCard({id, titel, auteur, coverUrl, isRead, isBookmar
                         </div>
                         <input
                             className={"shrink-0 h-10 w-auto"}
-                            onClick={() => addToLeesLijst(id, isBookmarked)}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                addToLeesLijst(id, isBookmarked);
+                            }}
                             type={"image"}
                             src={isBookmarked ? bookmarkFilled : bookmark}
                             alt={"Bookmark knop"}
                         />
                         <input
                             className={"shrink-0 h-10 w-auto"}
-                            onClick={() => toggleRead(id, isRead)}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                toggleRead(id, isRead);
+                            }}
                             type={"image"}
                             src={isRead ? bookRead : bookUnread}
                             alt={"Is gelezen knop"}

@@ -18,7 +18,7 @@ export function DiscoveryPage() {
 
     const SKELETON_KEYS = Array.from({ length: 30 }, (_, i) => `skeleton-${i}`);
 
-    if(!unableToLoadBoeken) {
+    if(unableToLoadBoeken) {
         return (
             <>
                 <div className="flex items-center justify-center h-full w-full flex-col">
