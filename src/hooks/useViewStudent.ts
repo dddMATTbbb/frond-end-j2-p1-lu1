@@ -26,7 +26,7 @@ export default function useViewStudent(studentId: string | undefined){
         }
 
         loadBoeken();
-    }, []);
+    }, [studentId]);
 
     const clickBackButton = () => {
         navigate("/DocentPanel");

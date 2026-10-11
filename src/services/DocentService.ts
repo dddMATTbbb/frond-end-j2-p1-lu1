@@ -25,7 +25,6 @@ export const getBoekenStudent = async(id: string):Promise<Boek[]> => {
         })
 
         if(!response.ok){
-            const error = await response.json()
             return []
         }
 

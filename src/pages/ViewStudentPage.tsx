@@ -8,6 +8,9 @@ export default function ViewStudentPage() {
     const { id } = useParams<{ id: string }>();
     const {clickBackButton, addToLeesLijst, boeken, loading} = useViewStudentPage(id);
 
+    // eslint-disable-next-line react/no-array-index-key
+    const skeletons = Array.from({ length: 8 }).map((_, i) => <BoekCardSkeleton key={`skeleton-${i}`} />);
+
     return (
         <>
             <header className="bg-white w-full z-1 p-5 shadow">
@@ -15,9 +18,7 @@ export default function ViewStudentPage() {
             </header>
             <div className="flex items-start w-full p-10 flex-wrap gap-6">
                 {loading ? (
-                    Array.from({ length: 8 }).map((_, i) => (
-                        <BoekCardSkeleton key={i} />
-                    ))
+                    skeletons
                 ) : (
                     <div className="flex items-start w-full p-10 flex-wrap gap-6">
                         {boeken.map((boek) => (

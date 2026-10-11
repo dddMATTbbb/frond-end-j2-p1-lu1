@@ -3,10 +3,11 @@ import {getForYouBoeken, updateStatusBoeken} from "../services/BoekenService.ts"
 import type {Boek} from "../types/boeken.ts";
 import {addToLeesLijst as addToLeesLijstApi} from "../services/LeesLijstService.ts";
 
+const emptyBoekList: Boek[] = [];
+
 export default function useForYou() {
     const [loading, setLoading] = useState(true)
     const [boeken, setBoeken] = useState<Boek[]>([])
-    const emptyBoekList: Boek[] = []
 
     useEffect(() => {
         const loadBoeken = async () => {
@@ -19,7 +20,6 @@ export default function useForYou() {
                 console.log(error)
             }finally{
                 setLoading(false)
-                console.log(boeken)
             }
         }
         loadBoeken()

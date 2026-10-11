@@ -1,7 +1,6 @@
 import StudentCard from "../components/StudentCard.tsx";
 import {useDocentPanel} from "../hooks/useDocentPanel.ts";
 import type {Student} from "../types/student.ts";
-import StudentCardSkeleton from "../components/StudentCardSkeleton.tsx";
 import BoekCardSkeleton from "../components/BoekCardSkeleton.tsx";
 
 export default function DocentPanelPage() {

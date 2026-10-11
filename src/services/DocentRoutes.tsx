@@ -1,9 +1,8 @@
-import { Navigate, Outlet, useNavigate} from "react-router-dom";
+import { Navigate, Outlet} from "react-router-dom";
 import { useState, useEffect } from "react";
 import Spinner from "../components/Spinner.tsx";
 
 export const DocentRoutes = () => {
-    const navigate = useNavigate();
     const [isDocent, setIsDocent] = useState<boolean | null>(null);
 
     useEffect(() => {
@@ -29,7 +28,7 @@ export const DocentRoutes = () => {
         }
 
         validateDocent();
-    }, [location.pathname, navigate])
+    }, [])
 
     if (isDocent === null) {
         return (
