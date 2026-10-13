@@ -8,7 +8,6 @@ export const getUserLeesprofielData = async () => {
             credentials: 'include',
         })
         const result = (await response.json()) as { data: LeesProfiel | undefined };
-        console.log(result.data);
         return result.data;
     }catch(error){
         console.log(error);

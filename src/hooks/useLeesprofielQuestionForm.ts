@@ -20,7 +20,7 @@ export function useLeesprofielQuestForm(){
         event.preventDefault();
 
         const response  = await submitForm(form);
-        if (response.ok) {
+        if (response.message === "leesprofiel added successfully") {
             setIsSubmitSuccess(true);
             sessionStorage.removeItem("leesprofiel-form");
             setForm(emptyLeesprofielFormData);

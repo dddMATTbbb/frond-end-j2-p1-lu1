@@ -1,19 +1,22 @@
 import type {Boek} from "../types/boeken.ts";
+import type {Student} from "../types/student.ts";
 
-export const getStudents = async() => {
-    try{
+export const getStudents = async (): Promise<Student[]> => {
+    try {
         const response = await fetch("http://localhost:3000/getStudents", {
             method: "GET",
             credentials: "include"
         })
 
-        if(!response.ok){
-            console.log('get students error');
+        if (!response.ok) {
+            return []
         }
 
-        return await response.json()
-    } catch (error){
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
         console.error(error);
+        return []
     }
 }
 

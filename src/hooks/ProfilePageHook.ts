@@ -23,7 +23,6 @@ export function useProfilePage() {
             try {
                 const data = await getUserLeesprofielData();
                 setProfiel(data ?? leegProfiel);
-                console.log(profiel)
             } catch {
                 showModal("Er ging iets mis", "Je profiel kon niet worden geladen.", "error");
             } finally {
@@ -31,7 +30,8 @@ export function useProfilePage() {
             }
         }
         load();
-    });
+        // oxlint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>)=> {
         const {name, value} = event.target;
