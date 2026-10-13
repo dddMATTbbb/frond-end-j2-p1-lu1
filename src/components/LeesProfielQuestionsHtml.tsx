@@ -13,7 +13,7 @@ export default function LeesProfielQuestionsHtml({form, handleChange}: Props) {
                     <label htmlFor="leeftijd">Leeftijd: </label>
                     <input
                         required
-                        className="border-b-2 outline-none"
+                        className="border-b-2 focus-visible:outline-red-500 focus-visible:outline-2 focus-visible:outline-offset-2"
                         type="number"
                         id="leeftijd"
                         name="leeftijd"
@@ -30,7 +30,7 @@ export default function LeesProfielQuestionsHtml({form, handleChange}: Props) {
                         required
                         name="gender"
                         id="gender"
-                        className="outline-none border-2 rounded-md"
+                        className="border-2 rounded-md focus-visible:outline-red-500 focus-visible:outline-2 focus-visible:outline-offset-2"
                         onChange={handleChange}
                         value={form?.gender ?? ''}
                     >
@@ -48,7 +48,7 @@ export default function LeesProfielQuestionsHtml({form, handleChange}: Props) {
                         required
                         name="leesniveau"
                         id="leesniveau"
-                        className="outline-none border-2 rounded-md"
+                        className="border-2 rounded-md focus-visible:outline-red-500 focus-visible:outline-2 focus-visible:outline-offset-2"
                         onChange={handleChange}
                         value={form?.leesniveau ?? ''}
                     >
@@ -65,7 +65,7 @@ export default function LeesProfielQuestionsHtml({form, handleChange}: Props) {
                         required
                         name="favorieteTypeMatariaal"
                         id="favorieteTypeMatariaal"
-                        className="outline-none border-2 rounded-md"
+                        className="border-2 rounded-md focus-visible:outline-red-500 focus-visible:outline-2 focus-visible:outline-offset-2"
                         onChange={handleChange}
                         value={form?.favorieteTypeMatariaal ?? ''}
                     >

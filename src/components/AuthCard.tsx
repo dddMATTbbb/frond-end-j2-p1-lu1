@@ -46,7 +46,7 @@ function AuthCard(){
                     </fieldset>
                     <div className="flex w-fit justify-between mt-10 flex-col">
                         <p>Als wie wilt u inloggen?</p>
-                        <div className="flex w-full justify-between">
+                        <div className="flex w-full justify-between focus-visible:outline-red-500 focus-visible:outline-2 focus-visible:outline-offset-2">
                             <fieldset>
                                 <input
                                     type="radio"
@@ -78,7 +78,7 @@ function AuthCard(){
                     <button
                         type="submit"
                         disabled={loading}
-                        className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-8 w-24 hover:bg-orange-400 hover:border-orange-400 duration-500 disabled:opacity-50"
+                        className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-8 w-24 transition-transform duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                     >
                         {loading ? 'Laden...' : authUi.submitTextButton}
                     </button>
@@ -86,7 +86,7 @@ function AuthCard(){
 
                 <p className="text-black mt-12">{authUi.vraagTypeAuth}</p>
                 <button
-                    className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-2 w-32 hover:bg-orange-400 hover:border-orange-400 duration-500"
+                    className="border-orange-500 bg-orange-500 border-4 rounded-xl mt-2 w-32 transition-transform duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                     onClick={() => {
                         handleAuthChange()
                         setIsSignSucces(false);
