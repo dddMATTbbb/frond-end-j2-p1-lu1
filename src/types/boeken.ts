@@ -16,3 +16,11 @@ export interface Boek {
     isBookmarked: boolean;
     isRead?: boolean;
 }
+
+export interface PaginatedBoeken {
+    boeken: Boek[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+}

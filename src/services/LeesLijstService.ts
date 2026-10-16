@@ -1,11 +1,15 @@
-import type { Boek } from "../types/boeken.ts";
+import type { PaginatedBoeken } from "../types/boeken.ts";
 
 const API_BASE = "http://localhost:3000";
 
-// Haalt alle boeken op die op de leeslijst van de ingelogde gebruiker staan
-export const getLeesLijst = async (): Promise<Boek[]> => {
+// Haalt alle boeken op die op de leeslijst van de ingelogde gebruiker staan, gepagineerd
+export const getLeesLijst = async (page: number = 1, limit: number = 20): Promise<PaginatedBoeken> => {
     try {
-        const response = await fetch(`${API_BASE}/leesLijst`, {
+        const params = new URLSearchParams();
+        params.append('page', page.toString());
+        params.append('limit', limit.toString());
+
+        const response = await fetch(`${API_BASE}/leesLijst?${params.toString()}`, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' },
             credentials: "include",
@@ -14,11 +18,32 @@ export const getLeesLijst = async (): Promise<Boek[]> => {
         if (!response.ok) {
             throw new Error(`Fout bij ophalen leeslijst: ${response.statusText}`);
         }
-        const data: Boek[] = await response.json();
-        return data;
+        const data = await response.json();
+        if (Array.isArray(data)) {
+            return {
+                boeken: data,
+                total: data.length,
+                page,
+                limit,
+                totalPages: Math.ceil(data.length / limit) || 1,
+            };
+        }
+        return {
+            boeken: data.boeken ?? [],
+            total: typeof data.total === 'number' ? data.total : (data.boeken?.length ?? 0),
+            page: typeof data.page === 'number' ? data.page : page,
+            limit: typeof data.limit === 'number' ? data.limit : limit,
+            totalPages: typeof data.totalPages === 'number' ? data.totalPages : (Math.ceil((data.total ?? 0) / limit) || 1),
+        };
     } catch (error) {
         console.error("Fout in getLeesLijst:", error);
-        return [];
+        return {
+            boeken: [],
+            total: 0,
+            page,
+            limit,
+            totalPages: 1,
+        };
     }
 };
 
