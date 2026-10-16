@@ -8,9 +8,9 @@ export function DiscoveryPage() {
     const {
         boeken,
         loading,
-        zoekTerm,
+        boekFilter,
         unableToLoadBoeken,
-        setZoekTerm,
+        handleChange,
         handleSubmit,
         addToLeesLijst,
         updateReadStatus
@@ -34,8 +34,8 @@ export function DiscoveryPage() {
         <>
             <Navbar/>
             <DiscoveryPageFilterBar
-                zoekTerm={zoekTerm}
-                setZoekTerm={setZoekTerm}
+                boekFilter={boekFilter}
+                setBoekFilter={handleChange}
                 handleSubmit={handleSubmit}
                 loading={loading}
             />
