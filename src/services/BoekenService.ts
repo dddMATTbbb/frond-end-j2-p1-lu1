@@ -1,13 +1,19 @@
-import type {Boek} from "../types/boeken.ts";
+import type {Boek, PaginatedBoeken} from "../types/boeken.ts";
 import type {boekFilter} from "../types/boekFilter.ts";
 
-export const getBoekenByFilter = async (boekFilter: boekFilter):Promise<Boek[]> => {
+export const getBoekenByFilter = async (
+    boekFilter: boekFilter,
+    page: number = 1,
+    limit: number = 20
+): Promise<PaginatedBoeken> => {
     try{
         const params = new URLSearchParams();
-        params.append('zoekTerm', boekFilter.zoekTerm);
-        if (boekFilter.taalNiveau !== null) params.append('taalNiveau', boekFilter.taalNiveau);
-        if (boekFilter.onderwerp !== null) params.append('onderwerp', boekFilter.onderwerp);
-        if (boekFilter.genre !== null) params.append('genre', boekFilter.genre);
+        params.append('page', page.toString());
+        params.append('limit', limit.toString());
+        if (boekFilter.zoekTerm) params.append('zoekTerm', boekFilter.zoekTerm);
+        if (boekFilter.taalNiveau !== null && boekFilter.taalNiveau !== undefined) params.append('taalNiveau', boekFilter.taalNiveau);
+        if (boekFilter.onderwerp !== null && boekFilter.onderwerp !== undefined) params.append('onderwerp', boekFilter.onderwerp);
+        if (boekFilter.genre !== null && boekFilter.genre !== undefined) params.append('genre', boekFilter.genre);
 
         const response = await fetch(`http://localhost:3000/boeken?${params.toString()}`, {
             method: 'GET',
@@ -17,11 +23,32 @@ export const getBoekenByFilter = async (boekFilter: boekFilter):Promise<Boek[]> 
         if (!response.ok) {
             throw new Error(`Request mislukt: ${response.status}`);
         }
-        const data:Boek[] = await response.json()
-        return data
+        const data = await response.json()
+        if (Array.isArray(data)) {
+            return {
+                boeken: data,
+                total: data.length,
+                page,
+                limit,
+                totalPages: Math.ceil(data.length / limit) || 1,
+            };
+        }
+        return {
+            boeken: data.boeken ?? [],
+            total: typeof data.total === 'number' ? data.total : (data.boeken?.length ?? 0),
+            page: typeof data.page === 'number' ? data.page : page,
+            limit: typeof data.limit === 'number' ? data.limit : limit,
+            totalPages: typeof data.totalPages === 'number' ? data.totalPages : (Math.ceil((data.total ?? 0) / limit) || 1),
+        };
     }catch(error){
         console.log(error);
-        return [];
+        return {
+            boeken: [],
+            total: 0,
+            page,
+            limit,
+            totalPages: 1,
+        };
     }
 }
 

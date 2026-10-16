@@ -16,42 +16,73 @@ export function useDiscoveryPage() {
     const [loading, setLoading] = useState(true);
     const [boekFilter, setBoekFilter] = useState<boekFilter>(leegBoekFilter);
     const [unableToLoadBoeken, setUnableToLoadBoeken] = useState(false);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [total, setTotal] = useState(0);
+    const limit = 20;
 
     useEffect(() => {
+        let isCancelled = false;
+
         async function loadBoeken() {
+            setLoading(true);
             try{
-                const data: Boek[] = await getBoekenByFilter(boekFilter);
-                setBoeken(data)
-                if(!data){
-                    setUnableToLoadBoeken(true);
+                const data = await getBoekenByFilter(boekFilter, page, limit);
+                if (!isCancelled) {
+                    setBoeken(data.boeken);
+                    setTotalPages(data.totalPages);
+                    setTotal(data.total);
+                    if(!data.boeken){
+                        setUnableToLoadBoeken(true);
+                    }
                 }
             }catch(error){
                 console.log(error);
-                setUnableToLoadBoeken(true);
+                if (!isCancelled) {
+                    setUnableToLoadBoeken(true);
+                }
             }finally{
-                setLoading(false);
+                if (!isCancelled) {
+                    setLoading(false);
+                }
             }
         }
         loadBoeken();
-    }, [boekFilter])
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [boekFilter, page])
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = event.target;
-        console.log(name, value)
         setBoekFilter((prev) => ({...prev, [name]: value}));
+        setPage(1);
+    }
+
+    const handlePageChange = (newPage: number) => {
+        if (newPage >= 1 && newPage <= totalPages && newPage !== page) {
+            setPage(newPage);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        setLoading(true);
-
-        try{
-            const data: Boek[] = await getBoekenByFilter(boekFilter)
-            setBoeken(data ?? [])
-        }catch(error){
-            console.log(error);
-        }finally{
-            setLoading(false);
+        if (page !== 1) {
+            setPage(1);
+        } else {
+            setLoading(true);
+            try{
+                const data = await getBoekenByFilter(boekFilter, 1, limit)
+                setBoeken(data.boeken ?? [])
+                setTotalPages(data.totalPages)
+                setTotal(data.total)
+            }catch(error){
+                console.log(error);
+            }finally{
+                setLoading(false);
+            }
         }
     }
 
@@ -88,5 +119,18 @@ export function useDiscoveryPage() {
     }
 
 
-    return {boeken, loading, boekFilter, unableToLoadBoeken, handleChange, handleSubmit, addToLeesLijst, updateReadStatus}
-}
+    return {
+        boeken,
+        loading,
+        boekFilter,
+        unableToLoadBoeken,
+        page,
+        totalPages,
+        total,
+        handlePageChange,
+        handleChange,
+        handleSubmit,
+        addToLeesLijst,
+        updateReadStatus
+    }
+}
