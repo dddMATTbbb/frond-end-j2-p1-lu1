@@ -14,6 +14,7 @@ export function useLeesprofielQuestForm(){
     )=> {
         const {name, value} = event.target;
         setForm((prev) => ({...prev, [name]: value}));
+        console.log(name, value);
     }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>)=> {

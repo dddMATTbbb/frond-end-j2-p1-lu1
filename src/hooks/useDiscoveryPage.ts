@@ -33,10 +33,11 @@ export function useDiscoveryPage() {
             }
         }
         loadBoeken();
-    }, [])
+    }, [boekFilter])
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = event.target;
+        console.log(name, value)
         setBoekFilter((prev) => ({...prev, [name]: value}));
     }
 

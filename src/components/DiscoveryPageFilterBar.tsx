@@ -27,7 +27,7 @@ export default function DiscoveryPageFilterBar({ boekFilter, setBoekFilter, hand
                                 <option value={undefined}></option>
                                 <option value="2F">2F</option>
                                 <option value="3F">3F</option>
-                                <option value="2/3F">2/3F</option>
+                                <option value="2F-3F">2/3F</option>
                             </select>
                         </fieldset>
                         <fieldset>
