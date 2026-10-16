@@ -1,28 +1,15 @@
 import type {Boek} from "../types/boeken.ts";
+import type {boekFilter} from "../types/boekFilter.ts";
 
-export const getBoeken = async ():Promise<Boek[]> => {
+export const getBoekenByFilter = async (boekFilter: boekFilter):Promise<Boek[]> => {
     try{
-        const response = await fetch('http://localhost:3000/boeken', {
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
-        })
-        if (!response.ok) {
-            throw new Error(`Request mislukt: ${response.status}`);
-        }
-        const data:Boek[] = await response.json()
-        return data
-    }catch(error){
-        console.log(error);
-        return [];
-    }
-}
+        const params = new URLSearchParams();
+        params.append('zoekTerm', boekFilter.zoekTerm);
+        if (boekFilter.taalNiveau !== null) params.append('taalNiveau', boekFilter.taalNiveau);
+        if (boekFilter.onderwerp !== null) params.append('onderwerp', boekFilter.onderwerp);
+        if (boekFilter.genre !== null) params.append('genre', boekFilter.genre);
 
-export const getBoekenByFilter = async (zoekTerm: string):Promise<Boek[]> => {
-    try{
-        const response = await fetch('http://localhost:3000/boeken?' + new URLSearchParams({
-            zoekTerm: zoekTerm,
-        }).toString(), {
+        const response = await fetch(`http://localhost:3000/boeken?${params.toString()}`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',

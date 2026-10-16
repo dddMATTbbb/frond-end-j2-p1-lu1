@@ -1,18 +1,26 @@
 import {useEffect, useState} from "react";
-import {getBoeken, getBoekenByFilter, updateStatusBoeken} from "../services/BoekenService.ts";
+import {getBoekenByFilter, updateStatusBoeken} from "../services/BoekenService.ts";
 import {addToLeesLijst as addToLeesLijstApi} from "../services/LeesLijstService.ts";
 import type {Boek} from "../types/boeken.ts";
+import type {boekFilter} from "../types/boekFilter.ts";
 
 export function useDiscoveryPage() {
+    const leegBoekFilter: boekFilter = {
+        zoekTerm: '',
+        taalNiveau: null,
+        genre: null,
+        onderwerp: null,
+    }
+
     const [boeken, setBoeken] = useState<Boek[]>([]);
     const [loading, setLoading] = useState(true);
-    const [zoekTerm, setZoekTerm] = useState("");
+    const [boekFilter, setBoekFilter] = useState<boekFilter>(leegBoekFilter);
     const [unableToLoadBoeken, setUnableToLoadBoeken] = useState(false);
 
     useEffect(() => {
         async function loadBoeken() {
             try{
-                const data: Boek[] = await getBoeken();
+                const data: Boek[] = await getBoekenByFilter(boekFilter);
                 setBoeken(data)
                 if(!data){
                     setUnableToLoadBoeken(true);
@@ -27,12 +35,17 @@ export function useDiscoveryPage() {
         loadBoeken();
     }, [])
 
-    const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const {name, value} = event.target;
+        setBoekFilter((prev) => ({...prev, [name]: value}));
+    }
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         setLoading(true);
 
         try{
-            const data: Boek[] = await getBoekenByFilter(zoekTerm)
+            const data: Boek[] = await getBoekenByFilter(boekFilter)
             setBoeken(data ?? [])
         }catch(error){
             console.log(error);
@@ -74,5 +87,5 @@ export function useDiscoveryPage() {
     }
 
 
-    return {boeken, loading, zoekTerm, unableToLoadBoeken, setZoekTerm, handleSubmit, addToLeesLijst, updateReadStatus}
+    return {boeken, loading, boekFilter, unableToLoadBoeken, handleChange, handleSubmit, addToLeesLijst, updateReadStatus}
 }
